@@ -5,6 +5,7 @@ import { useThemeStore } from "../../src/store/themeStore";
 import { ThemedView } from "../../src/components/atoms/ThemedView";
 import { Text } from "../../src/components/atoms/Text";
 import { Input } from "../../src/components/atoms/Input";
+import { Icon } from "../../src/components/atoms/Icon";
 
 
 const Index = () => {
@@ -20,6 +21,9 @@ const Index = () => {
 
             <Input className="rounded-md" placeholder="input here" />
             <Input className="rounded-full shadow mt-4" placeholder="Something went wrong" state="error" />
+            <Icon name="fitness" lightColorClass="text-green-500" darkColorClass="text-green-400" size={42} />
+            <Icon name="settings" size={28} className="text-blue-500" />
+            <Icon name="warning" size={28} />
             <ThemeToggle />
         </ThemedView>
     );
