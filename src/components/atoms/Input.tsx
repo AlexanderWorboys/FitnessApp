@@ -5,6 +5,7 @@ import { inputStateVariants } from "../../theme/Varients";
 export type InputState = "default" | "success" | "error";
 
 interface InputProps {
+    keyboardType?: "numeric" | "default"
     lightClassName?: string;
     darkClassName?: string;
     state?: InputState;
@@ -17,6 +18,7 @@ interface InputProps {
 
 
 export const Input = ({
+    keyboardType = "default",
     lightClassName = "bg-muted-light text-text-light",
     darkClassName = "bg-muted-dark text-text-dark",
     state = "default",
@@ -40,6 +42,7 @@ export const Input = ({
             value={value}
             onChangeText={onChangeText}
             secureTextEntry={secureTextEntry}
+            keyboardType={keyboardType}
         />
       )
 
