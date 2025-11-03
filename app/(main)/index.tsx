@@ -7,10 +7,11 @@ import { Text } from "../../src/components/atoms/Text";
 import { Input } from "../../src/components/atoms/Input";
 import { Icon } from "../../src/components/atoms/Icon";
 import { Row } from "../../src/components/atoms/Row";
-import { Pressable } from "react-native";
+import { Button, Pressable } from "react-native";
 import { TableHeader } from "../../src/components/molecules/TableHeader";
 import { useState } from "react";
 import { TableRow } from "../../src/components/molecules/TableRow";
+import { Table } from "../../src/components/organisms/Table";
 
 
 const Index = () => {
@@ -25,16 +26,29 @@ const Index = () => {
     ]
 
     const [tableData, setTableData] = useState([
-        { set: 1, previous: "40 × 10", kg: 40, reps: 10, done: true },
-        { set: 2, previous: "60 × 10", kg: 60, reps: 10, done: false },
+        { set: 1, previous: "40 x 10", kg: "40", reps: "10", done: true },
+        { set: 2, previous: "60 x 10", kg: "60", reps: "10", done: false },
     ])
 
     const handleRowChange = (rowIndex: number, key: string, value: any) => {
-    setTableData((prev) => {
-        const newData = [...prev]
-        newData[rowIndex] = { ...newData[rowIndex], [key]: value }
-        return newData
-    })
+        setTableData((prev) => {
+            const newData = [...prev]
+            newData[rowIndex] = { ...newData[rowIndex], [key]: value }
+            return newData
+        })
+    }
+
+    const addSet = () => {
+        setTableData((prev) => [
+            ...prev,
+            {
+                set: prev.length + 1,
+                previous: "-",
+                kg: "",
+                reps: "",
+                done: false,
+            },
+        ])
     }
 
     return (
@@ -53,7 +67,7 @@ const Index = () => {
             <Icon name="warning" size={28} />
             <ThemeToggle />
 
-            <TableHeader columns={columns} />
+            {/* <TableHeader columns={columns} />
             {tableData.map((row, i) => (
                 <TableRow
                     key={i}
@@ -61,26 +75,21 @@ const Index = () => {
                     columns={columns}
                     onChange={(key, value) => handleRowChange(i, key, value)}
                 />
-            ))}
+            ))} */}
 
-            {/* <Row>
-                <Text>1</Text>
-                <Text>60 x 10</Text>
-                <Input value="80" className="w-16 text-center" />
-                <Input value="10" className="w-16 text-center" />
-                <Pressable onPress={() => alert("Pressed!")}>
-                    <Icon name="checkmark-circle-outline" size={32} lightColorClass="text-text-muted-light" darkColorClass="text-text-muted-dark" />
-                </Pressable>
-            </Row>
-            <Row>
-                <Text>2</Text>
-                <Text>60 x 10</Text>
-                <Input keyboardType="numeric" placeholder="80" className="w-16 text-center" />
-                <Input value="10" className="w-16 text-center" />
-                <Pressable onPress={() => alert("Pressed!")}>
-                    <Icon name="checkmark-circle-outline" size={32} lightColorClass="text-text-muted-light" darkColorClass="text-text-muted-dark" />
-                </Pressable>
-            </Row> */}
+            <Table
+                columns={columns}
+                data={tableData}
+                onChange={setTableData}
+                footer={
+                    <Button
+                    title="Add Set"
+                    onPress={addSet}
+                    />
+                }
+            />
+
+
         </ThemedView>
     );
 }
