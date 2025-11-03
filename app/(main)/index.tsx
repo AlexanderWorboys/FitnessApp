@@ -10,22 +10,21 @@ import { Row } from "../../src/components/atoms/Row";
 import { Button, Pressable } from "react-native";
 import { TableHeader } from "../../src/components/molecules/TableHeader";
 import { useState } from "react";
-import { TableRow } from "../../src/components/molecules/TableRow";
-import { Table } from "../../src/components/organisms/Table";
+import Table from "../../src/components/organisms/Table";
+import { weightColumns, cadioColumns } from "../../src/utils/TestData";
 
 
 const Index = () => {
     const { theme } = useThemeStore();
 
-    const columns = [
-        { key: "set", label: "Set", width: "w-10", align: "center" },
-        { key: "previous", label: "Previous", width: "flex-1", align: "center" },
-        { key: "kg", label: "Kg", width: "w-14", align: "center", editable: true, type: "input" },
-        { key: "reps", label: "Reps", width: "w-14", align: "center", editable: true, type: "input" },
-        { key: "done", label: "✔", width: "w-8", align: "center", type: "icon" },
-    ]
+    
 
     const [tableData, setTableData] = useState([
+        { set: 1, previous: "40 x 10", kg: "40", reps: "10", done: true },
+        { set: 2, previous: "60 x 10", kg: "60", reps: "10", done: false },
+    ])
+
+    const [cadioData, setCadioData] = useState([
         { set: 1, previous: "40 x 10", kg: "40", reps: "10", done: true },
         { set: 2, previous: "60 x 10", kg: "60", reps: "10", done: false },
     ])
@@ -51,6 +50,14 @@ const Index = () => {
         ])
     }
 
+    const handleDelete = (index: number) => {
+        setTableData((prev) => prev.filter((_, i) => i !== index))
+    }
+
+    const handleEdit = (index: number) => {
+        console.log("Edit row:", index)
+    }
+
     return (
         <ThemedView className="p-4 rounded-2xl pt-20 flex-1">
             <Text varient="header">
@@ -67,28 +74,25 @@ const Index = () => {
             <Icon name="warning" size={28} />
             <ThemeToggle />
 
-            {/* <TableHeader columns={columns} />
-            {tableData.map((row, i) => (
-                <TableRow
-                    key={i}
-                    rowData={row}
-                    columns={columns}
-                    onChange={(key, value) => handleRowChange(i, key, value)}
-                />
-            ))} */}
+            
 
             <Table
-                columns={columns}
+                columns={weightColumns}
                 data={tableData}
                 onChange={setTableData}
-                footer={
-                    <Button
-                    title="Add Set"
-                    onPress={addSet}
-                    />
-                }
+                onTrailing={handleDelete}
+                //onLeading={handleEdit}
+                footer={ <Button title="Add Set" onPress={addSet} /> }
             />
 
+            <Table
+                columns={cadioColumns}
+                data={cadioData}
+                onChange={setTableData}
+                onTrailing={handleDelete}
+                //onLeading={handleEdit}
+                footer={ <Button title="Add Set" onPress={addSet} /> }
+            />
 
         </ThemedView>
     );

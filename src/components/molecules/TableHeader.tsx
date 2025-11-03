@@ -35,7 +35,7 @@ export const TableHeader = ({
         <Row
             lightClassName={lightClassName}
             darkClassName={darkClassName}
-            className={`border-b-2 ${themedClass} ${className}`}
+            className={`border-b-2 py-4 ${themedClass} ${className}`}
         >
             {columns.map((column) => (
                 <Text

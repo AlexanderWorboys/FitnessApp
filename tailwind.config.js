@@ -7,9 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Primary brand colors
+        "primary": "#28D8FF",
+        "secondary": "2C2C2C",
+
         // Backgrounds
         "background-light": "#F9FAFB",
-        "background-dark": "#1F2937",
+        "background-dark": "#121212",
         "card-light": "#FFFFFF",
         "card-dark": "#2D3748",
         "muted-light": "#F3F4F6", // for Inputs 

@@ -2,12 +2,15 @@ import { View } from "react-native";
 import { useThemeStore } from "../../store/themeStore";
 import { TableColumn, TableRow } from "../molecules/TableRow";
 import { TableHeader } from "../molecules/TableHeader";
+import { SwipeableRow } from "../molecules/SwipableRow";
 
 
 interface TableProps {
     columns: TableColumn[];
     data: any[];
     onChange?: (newData: any[]) => void;
+    onTrailing?: (rowIndex: number) => void;
+    onLeading?: (rowIndex: number) => void;
     footer?: React.ReactNode;
     lightHeaderColorClass?: string;
     darkHeaderColorClass?: string;
@@ -20,11 +23,13 @@ export const Table = ({
     columns,
     data,
     onChange,
+    onTrailing,
+    onLeading,
     footer,
     lightHeaderColorClass = "bg-background-light border-border-light",
     darkHeaderColorClass = "bg-background-dark border-border-dark",
-    lightRowColorClass = "",
-    darkRowColorClass = "",
+    //lightRowColorClass = "", // To be potentially implemented later to allow custom row colours
+    //darkRowColorClass = "", // To be potentially implemented later to allow custom row colours
     className = ""
 }: TableProps) => {
     const  { theme }  = useThemeStore();
@@ -32,7 +37,6 @@ export const Table = ({
     const themedHeaderClass =
         theme === "dark" ? `${darkHeaderColorClass} ${className}` : `${lightHeaderColorClass} ${className}`;
     
-    const themedRowClass = theme === "dark" ? darkRowColorClass : lightRowColorClass;
 
     const handleRowChange = (rowIndex: number, key: string, value: any) => {
         if (!onChange) return;
@@ -46,13 +50,14 @@ export const Table = ({
             <TableHeader columns={columns} />
 
             {data.map((row, index) => (
-                <TableRow
+                <SwipeableRow
                     key={index}
                     rowData={row}
                     columns={columns}
                     onChange={(key, val) => handleRowChange(index, key, val)}
-                    lightClassName={lightRowColorClass}
-                    darkClassName={darkRowColorClass}
+                    swipeable={!!(onLeading || onTrailing)}
+                    onLeading={onLeading ? () => onLeading(index) : undefined}
+                    onTrailing={onTrailing ? () => onTrailing(index) : undefined}
                 />
             ))}
 
@@ -64,3 +69,5 @@ export const Table = ({
         </View>
     )
 }
+
+export default Table;
