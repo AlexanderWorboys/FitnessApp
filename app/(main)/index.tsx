@@ -11,52 +11,12 @@ import { Button, Pressable } from "react-native";
 import { TableHeader } from "../../src/components/molecules/TableHeader";
 import { useState } from "react";
 import Table from "../../src/components/organisms/Table";
-import { weightColumns, cadioColumns } from "../../src/utils/TestData";
+import { weightColumns } from "../../src/utils/TestData";
+import ExercisePanel from "../../src/components/organisms/ExercisePanel";
 
 
 const Index = () => {
     const { theme } = useThemeStore();
-
-    
-
-    const [tableData, setTableData] = useState([
-        { set: 1, previous: "40 x 10", kg: "40", reps: "10", done: true },
-        { set: 2, previous: "60 x 10", kg: "60", reps: "10", done: false },
-    ])
-
-    const [cadioData, setCadioData] = useState([
-        { set: 1, previous: "40 x 10", kg: "40", reps: "10", done: true },
-        { set: 2, previous: "60 x 10", kg: "60", reps: "10", done: false },
-    ])
-
-    const handleRowChange = (rowIndex: number, key: string, value: any) => {
-        setTableData((prev) => {
-            const newData = [...prev]
-            newData[rowIndex] = { ...newData[rowIndex], [key]: value }
-            return newData
-        })
-    }
-
-    const addSet = () => {
-        setTableData((prev) => [
-            ...prev,
-            {
-                set: prev.length + 1,
-                previous: "-",
-                kg: "",
-                reps: "",
-                done: false,
-            },
-        ])
-    }
-
-    const handleDelete = (index: number) => {
-        setTableData((prev) => prev.filter((_, i) => i !== index))
-    }
-
-    const handleEdit = (index: number) => {
-        console.log("Edit row:", index)
-    }
 
     return (
         <ThemedView className="p-4 rounded-2xl pt-20 flex-1">
@@ -74,25 +34,7 @@ const Index = () => {
             <Icon name="warning" size={28} />
             <ThemeToggle />
 
-            
-
-            <Table
-                columns={weightColumns}
-                data={tableData}
-                onChange={setTableData}
-                onTrailing={handleDelete}
-                //onLeading={handleEdit}
-                footer={ <Button title="Add Set" onPress={addSet} /> }
-            />
-
-            <Table
-                columns={cadioColumns}
-                data={cadioData}
-                onChange={setTableData}
-                onTrailing={handleDelete}
-                //onLeading={handleEdit}
-                footer={ <Button title="Add Set" onPress={addSet} /> }
-            />
+            <ExercisePanel />
 
         </ThemedView>
     );

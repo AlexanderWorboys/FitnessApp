@@ -1,12 +1,30 @@
 import 'react-native-reanimated'
 import 'react-native-gesture-handler'
-import { Stack } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
 import "./global.css";
 import { ThemeProvider } from "../src/theme/ThemeProvider";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useFonts } from 'expo-font';
+import { useEffect } from 'react';
 
 const MainLayout = () => {
-    
+    const [fontsLoaded] = useFonts({
+    "Inter-Bold": require('../assets/fonts/Inter-Bold.ttf'),
+    "Inter-ExtraBold": require('../assets/fonts/Inter-ExtraBold.ttf'),
+    "Inter-Light": require('../assets/fonts/Inter-Light.ttf'),
+    "Inter-Medium": require('../assets/fonts/Inter-Medium.ttf'),
+    "Inter-Regular": require('../assets/fonts/Inter-Regular.ttf'),
+    "Inter-SemiBold": require('../assets/fonts/Inter-SemiBold.ttf'),
+  });
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) return null;
+
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
             <ThemeProvider>

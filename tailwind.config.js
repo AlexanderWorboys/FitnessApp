@@ -6,6 +6,14 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        inter: ['Inter-Regular', 'sans-serif'],
+        "inter-bold": ['Inter-Bold', 'sans-serif'],
+        "inter-extrabold": ['Inter-ExtraBold', 'sans-serif'],
+        "inter-medium": ['Inter-Medium', 'sans-serif'],
+        "inter-semibold": ['Inter-SemiBold', 'sans-serif'],
+        "inter-light": ['Inter-Light', 'sans-serif'],
+      },
       colors: {
         // Primary brand colors
         "primary": "#28D8FF",
