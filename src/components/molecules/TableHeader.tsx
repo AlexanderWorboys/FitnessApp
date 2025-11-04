@@ -1,6 +1,8 @@
 import { useThemeStore } from "../../store/themeStore";
 import { Text } from "../../components/atoms/Text";
 import { Row } from "../atoms/Row";
+import { Icon } from "../atoms/Icon";
+import { Ionicons } from "@expo/vector-icons";
 
 
 interface TableColumn {
@@ -8,6 +10,7 @@ interface TableColumn {
     label: string;
     width?: string; // e.g. "w-16", "1/4"??
     align?: "left" | "center" | "right";
+    type?: "text" | "input" | "icon";
 }
 
 interface TableHeaderProps {
@@ -37,21 +40,38 @@ export const TableHeader = ({
             darkClassName={darkClassName}
             className={`border-b-2 py-4 ${themedClass} ${className}`}
         >
-            {columns.map((column) => (
-                <Text
-                    key={column.key}
-                    className={`${ column.width || "flex-1"}
-                    font-semibold text-sm uppercase ${
-                        column.align === "center"
-                            ? "text-center"
-                            : column.align === "right"
-                            ? "text-right"
-                            : "text-left"
-                    }`}
-                >
-                    {column.label}
-                </Text>
-            ))}
+            {columns.map((column) => {
+                if (column.type === "icon") {
+                    return (
+                        <Icon 
+                            key={column.key} 
+                            name={column.label as keyof typeof Ionicons.glyphMap} 
+                            className={`${column.width || "flex-1"}
+                                ${column.align === "center"
+                                    ? "text-center"
+                                    : column.align === "right"
+                                        ? "text-right"
+                                        : "text-left"
+                                }`
+                            } 
+                        />
+                    )
+                }
+                return (
+                    <Text
+                        key={column.key}
+                        className={`${column.width || "flex-1"}
+                    font-semibold text-sm uppercase ${column.align === "center"
+                                ? "text-center"
+                                : column.align === "right"
+                                    ? "text-right"
+                                    : "text-left"
+                            }`}
+                    >
+                        {column.label}
+                    </Text>
+                )
+            })}
 
         </Row>
     )

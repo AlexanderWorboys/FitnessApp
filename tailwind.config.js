@@ -23,7 +23,7 @@ module.exports = {
         "background-light": "#F9FAFB",
         "background-dark": "#121212",
         "card-light": "#FFFFFF",
-        "card-dark": "#2D3748",
+        "card-dark": "#313131",
         "muted-light": "#F3F4F6", // for Inputs 
         "muted-dark": "#374151",
 

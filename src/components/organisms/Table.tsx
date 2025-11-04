@@ -46,7 +46,7 @@ export const Table = ({
     }
 
     return (
-        <View className={`rounded-2xl overflow-hidden border ${themedHeaderClass} ${className}`} >
+        <View className={`overflow-hidden border ${themedHeaderClass} ${className}`} >
             <TableHeader columns={columns} />
 
             {data.map((row, index) => (

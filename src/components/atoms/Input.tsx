@@ -1,13 +1,12 @@
 import { useThemeStore } from "../../store/themeStore";
 import { TextInput } from "react-native";
-import { inputStateVariants } from "../../theme/Varients";
+import { inputStateVariants, inputVariants } from "../../theme/Varients";
 
-export type InputState = "default" | "success" | "error";
+export type InputState = "default" | "success" | "error" | "blended";
 
 interface InputProps {
     keyboardType?: "numeric" | "default"
-    lightClassName?: string;
-    darkClassName?: string;
+    variant?: keyof typeof inputVariants;
     state?: InputState;
     placeholder?: string;
     value?: string;
@@ -19,8 +18,7 @@ interface InputProps {
 
 export const Input = ({
     keyboardType = "default",
-    lightClassName = "bg-muted-light text-text-light",
-    darkClassName = "bg-muted-dark text-text-dark",
+    variant = "default",
     state = "default",
     placeholder,
     value,
@@ -29,14 +27,20 @@ export const Input = ({
     className = ""
 }: InputProps) => {
     const { theme } = useThemeStore();
-    const themedClass =
-    theme === "dark"
-      ? `${darkClassName} ${inputStateVariants[state]}`
-      : `${lightClassName} ${inputStateVariants[state]}`;
+    // console.log("inputVarients:", inputVariants);
+    // console.log("variant:", variant);
+    // console.log("theme:", theme);
+    // console.log("inputVarients[variant]:", inputVariants[variant]);
+    const baseClasses = inputVariants[variant][theme];
+    const stateClasses = inputStateVariants[state];
+    // const themedClass =
+    // theme === "dark"
+    //   ? `${darkClassName} ${inputStateVariants[state]}`
+    //   : `${lightClassName} ${inputStateVariants[state]}`;
 
       return (
         <TextInput
-            className={`border px-4 py-3 ${themedClass} ${className}`}
+            className={`px-4 py-3 ${baseClasses} ${stateClasses} ${className}`}
             placeholder={placeholder}
             placeholderTextColor={theme === "dark" ? "#A0A0A0" : "#606060"}
             value={value}

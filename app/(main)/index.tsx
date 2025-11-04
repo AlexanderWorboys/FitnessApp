@@ -13,29 +13,22 @@ import { useState } from "react";
 import Table from "../../src/components/organisms/Table";
 import { weightColumns } from "../../src/utils/TestData";
 import ExercisePanel from "../../src/components/organisms/ExercisePanel";
+import { Card } from "../../src/components/atoms/Card";
+import { ScrollView } from "react-native-gesture-handler";
+import { Workout } from "../../src/components/templates/Workout";
 
 
 const Index = () => {
     const { theme } = useThemeStore();
 
     return (
-        <ThemedView className="p-4 rounded-2xl pt-20 flex-1">
-            <Text varient="header">
-                Welcome to Expo Router
-            </Text>
-            <Text varient="subheader">This is getting exciting!</Text>
-            <Text>This is getting exciting!</Text>
-            <Text varient="muted">This is getting exciting!</Text>
-
-            <Input className="rounded-md" placeholder="input here" />
-            <Input className="rounded-full shadow mt-4" placeholder="Something went wrong" state="error" />
-            <Icon name="fitness" lightColorClass="text-green-500" darkColorClass="text-green-400" size={42} />
-            <Icon name="settings" size={28} className="text-blue-500" />
-            <Icon name="warning" size={28} />
+        <ThemedView className=" rounded-2xl pt-20 flex-1">
+            {/* <ScrollView className="p-4" showsVerticalScrollIndicator={false}> */}
+            
             <ThemeToggle />
+            <Workout />
 
-            <ExercisePanel />
-
+            {/* </ScrollView> */}
         </ThemedView>
     );
 }
