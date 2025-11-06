@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { weightColumns } from "../../utils/TestData";
+import { weightColumns } from "../../data/tableColumns/weightColumns"
 import Table from "./Table";
 import { Button, View } from "react-native";
 import { Icon, Text, Row, Card, Input } from "../atoms";

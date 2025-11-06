@@ -24,6 +24,20 @@ export interface Workout {
   id: string
   name: string
   startTime: number
+  endTime?: number
   exercises: WorkoutExercise[]
+  completed: boolean
+  fromTemplate?: string
 }
+
+export interface WorkoutTemplate {
+  id: string
+  name: string
+  description?: string
+  exercises: WorkoutExercise[]
+  createdAt: number
+  updatedAt?: number
+  tags?: string[]
+}
+
 

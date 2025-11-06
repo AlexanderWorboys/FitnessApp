@@ -1,13 +1,15 @@
-import { Button, ScrollView, View } from "react-native";
+import { Button, FlatList, ScrollView, View } from "react-native";
 import { useWorkoutStore } from "../../store/WorkoutStore";
 import { WorkoutSummary } from "../organisms/WorkoutSummary";
 import ExercisePanel from "../organisms/ExercisePanel";
 import { ExerciseType, setEntry, WorkoutExercise } from "../../types/workout";
+import { getAllWorkouts } from "../../database/workoutDb";
 
 
 
 export const Workout = () => {
-    const { activeWorkout, startWorkout, addExercise } = useWorkoutStore()
+    const { activeWorkout, startWorkout, addExercise, completeWorkout } = useWorkoutStore()
+    const workouts = getAllWorkouts()
 
     if (!activeWorkout) {
         return (
@@ -47,6 +49,9 @@ export const Workout = () => {
 
             <View className="mt-6">
                 <Button title="Add Exercise" onPress={handleAddExercise} />
+            </View>
+            <View className="mt-6">
+                <Button title="Finish Workout" onPress={completeWorkout} />
             </View>
         </ScrollView>
     );

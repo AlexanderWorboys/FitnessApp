@@ -6,8 +6,11 @@ import { ThemeProvider } from "../src/theme/ThemeProvider";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
+import { useWorkoutStore } from '../src/store/WorkoutStore';
+import { getAllTemplates, initWorkoutDb } from '../src/database/workoutDb';
 
 const MainLayout = () => {
+    const setTemplates = useWorkoutStore((state) => state.setTemplates)
     const [fontsLoaded] = useFonts({
     "Inter-Bold": require('../assets/fonts/Inter-Bold.ttf'),
     "Inter-ExtraBold": require('../assets/fonts/Inter-ExtraBold.ttf'),
@@ -22,6 +25,15 @@ const MainLayout = () => {
       SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
+
+  useEffect(() => {
+    const setupDb = async () => {
+      await initWorkoutDb()
+      const templates = await getAllTemplates()
+      setTemplates(templates)
+    }
+    setupDb()
+  }, [])
 
   if (!fontsLoaded) return null;
 

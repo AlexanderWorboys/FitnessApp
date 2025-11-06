@@ -26,6 +26,8 @@ module.exports = {
         "card-dark": "#313131",
         "muted-light": "#F3F4F6", // for Inputs 
         "muted-dark": "#374151",
+        "nav-light": '#FFFFFF',
+        "nav-dark": "121212",
 
         // Text
         "text-light": "#000000",
