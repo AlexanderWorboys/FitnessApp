@@ -8,6 +8,7 @@ import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import { useWorkoutStore } from '../src/store/WorkoutStore';
 import { getAllTemplates, initWorkoutDb } from '../src/database/workoutDb';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 const MainLayout = () => {
     const setTemplates = useWorkoutStore((state) => state.setTemplates)
@@ -39,9 +40,11 @@ const MainLayout = () => {
 
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
+          <BottomSheetModalProvider>
             <ThemeProvider>
                 <Stack screenOptions={{ headerShown: false}} />
             </ThemeProvider>
+            </BottomSheetModalProvider>
         </GestureHandlerRootView>
     )
 }

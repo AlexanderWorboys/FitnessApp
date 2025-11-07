@@ -1,9 +1,4 @@
-export const textVariants = {
-  header: "text-xl font-bold",
-  subheader: "text-lg font-semibold",
-  body: "text-base",
-  muted: "text-sm",
-};
+
 
 export const inputStateVariants = {
     default: "border-border-light dark:border-border-dark",

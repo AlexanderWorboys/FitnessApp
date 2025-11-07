@@ -1,8 +1,7 @@
 import { Text as RNText, TextProps } from "react-native";
 import { useThemeStore } from "../../store/themeStore";
-import { textVariants } from "../../theme/Varients";
 
-type Varient = "header" | "subheader" | "body" | "muted";
+type Varient = "title" | "header" | "subheader" | "body" | "muted";
 
 interface Props extends TextProps {
     lightClassName?: string;
@@ -10,6 +9,14 @@ interface Props extends TextProps {
     varient? : Varient;
     className? : string;
 }
+
+ const textVariants = {
+    title: "text-3xl font-inter-bold",
+  header: "text-xl font-inter-bold",
+  subheader: "text-lg font-semibold",
+  body: "text-inter",
+  muted: "text-inter-light",
+};
 
 export const Text = ({  
     lightClassName = "text-text-light", 
