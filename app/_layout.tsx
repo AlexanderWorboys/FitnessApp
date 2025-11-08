@@ -9,10 +9,11 @@ import { useEffect } from 'react';
 import { useWorkoutStore } from '../src/store/WorkoutStore';
 import { getAllTemplates, initWorkoutDb } from '../src/database/workoutDb';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { WorkoutSheet } from '../src/components/templates/WorkoutSheet';
 
 const MainLayout = () => {
-    const setTemplates = useWorkoutStore((state) => state.setTemplates)
-    const [fontsLoaded] = useFonts({
+  const setTemplates = useWorkoutStore((state) => state.setTemplates)
+  const [fontsLoaded] = useFonts({
     "Inter-Bold": require('../assets/fonts/Inter-Bold.ttf'),
     "Inter-ExtraBold": require('../assets/fonts/Inter-ExtraBold.ttf'),
     "Inter-Light": require('../assets/fonts/Inter-Light.ttf'),
@@ -38,15 +39,15 @@ const MainLayout = () => {
 
   if (!fontsLoaded) return null;
 
-    return (
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <BottomSheetModalProvider>
-            <ThemeProvider>
-                <Stack screenOptions={{ headerShown: false}} />
-            </ThemeProvider>
-            </BottomSheetModalProvider>
-        </GestureHandlerRootView>
-    )
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <BottomSheetModalProvider>
+        <ThemeProvider>
+          <Stack screenOptions={{ headerShown: false }} />
+        </ThemeProvider>
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
+  )
 }
 
 export default MainLayout;

@@ -1,20 +1,54 @@
-import { View, Text } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { useWorkoutStore } from "../../src/store/WorkoutStore"
-import { Button, ThemedView, ThemeToggle } from "../../src/components/atoms";
+import { Button, Text, ThemedView, ThemeToggle } from "../../src/components/atoms";
+import { useRef } from "react";
+import { ScrollView } from "react-native-gesture-handler";
+import { WorkoutSheet } from "../../src/components/templates/WorkoutSheet";
+import { useSheetStore } from "../../src/store/sheetStore";
 
 export default function CreateWorkoutScreen() {
-    const { startWorkout } = useWorkoutStore();
+    const sheetRef = useRef<any>(null)
+    const { startWorkout, templates } = useWorkoutStore();
+    const { openSheet } = useSheetStore()
+
+    const handleStart = () => {
+        startWorkout("New Workout")
+        openSheet()
+    }
+
+
+    const handleTemplateStart = (template: any) => {
+        startWorkout(template)
+        openSheet()
+    }
+
+
 
     return (
         <ThemedView className="pt-20 flex-1">
-            {/* <ScrollView className="p-4" showsVerticalScrollIndicator={false}> */}
-
-            <ThemeToggle />
+            
+            <Text varient="title">CreateWorkout</Text>
             <View className="flex-1 items-center justify-center">
-                <Button label="Start New Workout" onPress={() => startWorkout("My Workout")} />
+                <Button label="Start New Workout" onPress={handleStart} />
             </View>
 
-            {/* </ScrollView> */}
+            <Text varient="title">Templates</Text>
+            <ScrollView>
+                {templates.map((t) => (
+                    <TouchableOpacity
+                        key={t.id}
+                        onPress={() => handleTemplateStart(t)}
+                        className="border rounded-xl p-3 mb-2"
+                    >
+                        <Text className="font-semibold">{t.name}</Text>
+                        {t.description && (
+                            <Text className="text-gray-500 text-xs">{t.description}</Text>
+                        )}
+                    </TouchableOpacity>
+                ))}
+            </ScrollView>
+
+           
         </ThemedView>
 
     );
