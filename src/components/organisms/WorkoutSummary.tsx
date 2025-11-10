@@ -2,6 +2,7 @@ import { View } from "react-native";
 import { Workout } from "../../types/workout";
 import { Text } from "../atoms/Text";
 import { useThemeStore } from "../../store/themeStore";
+import Timer from "../molecules/Timer";
 
 
 interface WorkoutSummaryProps {
@@ -20,6 +21,7 @@ export const WorkoutSummary = ({ workout }: WorkoutSummaryProps) => {
             <Text varient="muted" className="text-center">
                 Started: {new Date(workout.startTime).toLocaleTimeString()}
             </Text>
+            <Timer startTime={workout.startTime} />
         </View>
     )
 }

@@ -1,13 +1,22 @@
+import { ReactNode } from "react"
 import { create } from "zustand"
 
 interface SheetStore {
-  isOpen: boolean
-  openSheet: () => void
-  closeSheet: () => void
+  isOpen: boolean;
+  content: ReactNode;
+  snapPoints: string[];
+  sheetIndex: number;
+  openSheet: (content: ReactNode) => void;
+  closeSheet: () => void;
+  setSheetIndex: (index: number) => void
 }
 
 export const useSheetStore = create<SheetStore>((set) => ({
   isOpen: false,
-  openSheet: () => set({ isOpen: true }),
-  closeSheet: () => set({ isOpen: false }),
+  content: null,
+  snapPoints: [ '100%'],
+  sheetIndex: 0,
+  openSheet: (content) => set({ isOpen: true, content }),
+  closeSheet: () => set({ isOpen: false, content: null }),
+  setSheetIndex: (index) => set({sheetIndex: index})
 }))

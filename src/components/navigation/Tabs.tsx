@@ -1,27 +1,29 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useThemeStore } from "../../store/themeStore";
-import Animated, {
-    useAnimatedStyle,
-    withTiming,
-} from "react-native-reanimated"
-import { useUIStore } from "../../store/uiStore"
-import { useEffect, useRef } from "react"
+// import Animated, {
+//     useAnimatedStyle,
+//     withTiming,
+//     interpolate,
+//     useSharedValue
+// } from "react-native-reanimated"
+// import { useUIStore } from "../../store/uiStore"
+// import { useEffect, useRef } from "react"
 
 export default function TabBar() {
     const { theme } = useThemeStore();
-    const hideTabBar = useUIStore((s) => s.hideTabBar)
+    //const hideTabBar = useUIStore((s) => s.hideTabBar)
+    //const sheetPosition = useSharedValue(1);
 
-    const animatedStyle = useAnimatedStyle(() => {
-        return {
-            transform: [
-                {
-                    translateY: withTiming(hideTabBar ? 80 : 0, { duration: 300 }),
-                },
-            ],
-            opacity: withTiming(hideTabBar ? 0 : 1, { duration: 300 }),
-        };
-    }, [hideTabBar])
+    // const animatedStyle = useAnimatedStyle(() => {
+    //     const tabBarHeight = interpolate(sheetPosition.value, [0, 1], [0, 70]); // As sheet collapses, decrease tab bar height
+    //     const tabBarOpacity = interpolate(sheetPosition.value, [0, 1], [0, 1]); // Fade tab bar in/out as sheet expands/collapses
+    //     console.log(tabBarHeight, tabBarOpacity)
+    //     return {
+    //     height: withTiming(tabBarHeight, { duration: 300 }),
+    //     opacity: withTiming(tabBarOpacity, { duration: 300 }),
+    //     };
+    // });
 
     const tabBarBackgroundColors = {
         light: '#ffffff', // your light mode bg-nav-light
@@ -79,6 +81,16 @@ export default function TabBar() {
                     }}
                 />
             </Tabs>
+
+            {/* <Animated.View
+                pointerEvents="none"
+                className="absolute bottom-0 left-0 right-0 bg-transparent"
+                style={[{
+                    backgroundColor: tabBarBackgroundColors[theme],
+                    borderTopWidth: 0.5,
+                    borderTopColor: "#6B7280",
+                }, animatedStyle]}
+            /> */}
         </>
     );
 }

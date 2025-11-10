@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { WorkoutSheet } from "../../src/components/templates/WorkoutSheet";
 import { useSheetStore } from "../../src/store/sheetStore";
+import { Workout } from "../../src/components/templates/Workout";
 
 export default function CreateWorkoutScreen() {
     const sheetRef = useRef<any>(null)
@@ -13,13 +14,13 @@ export default function CreateWorkoutScreen() {
 
     const handleStart = () => {
         startWorkout("New Workout")
-        openSheet()
+        openSheet(<Workout />)
     }
 
 
     const handleTemplateStart = (template: any) => {
         startWorkout(template)
-        openSheet()
+        openSheet(<Text>Test</Text>)
     }
 
 
