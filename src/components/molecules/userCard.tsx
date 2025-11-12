@@ -9,16 +9,18 @@ interface UserCardProps {
     isVerified: boolean,
     verification?: string,
     postType?: postType
+    className?: string
 }
 
 export const UserCard = ({
     username = "John Doe",
     isVerified = true,
     verification = "Qualified Personal Trainer",
-    postType = "Workout By"
+    postType = "Workout By",
+    className = ""
 }: UserCardProps) => {
     return (
-        <View className="flex flex-row items-center">
+        <View className={`flex flex-row items-center ${className}`}>
             <Avatar fallback="JD" uri="https://i.pravatar.cc/150?img=1" />
             <View className="ml-2 flex-1">
                 <Text varient="muted">{postType}</Text>

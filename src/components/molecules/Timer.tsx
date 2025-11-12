@@ -26,7 +26,7 @@ const Timer = ({ startTime }: {startTime: number}) => {
     return `${secs}s`;
   };
 
-  return <Text>{formatElapsed(elapsed)}</Text>;
+  return <Text varient="title">{formatElapsed(elapsed)}</Text>;
 };
 
 export default Timer;

@@ -9,8 +9,8 @@ export const inputStateVariants = {
 
 export const inputVariants = {
   default: {
-    light: "bg-muted-light text-text-light border",
-    dark: "bg-muted-dark text-text-dark border",
+    light: "px-4 py-3 bg-muted-light text-text-light border",
+    dark: "px-4 py-3 bg-muted-dark text-text-dark border",
   },
   invisible: {
     light: "bg-transparent text-text-light",

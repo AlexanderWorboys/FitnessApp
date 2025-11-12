@@ -40,7 +40,7 @@ export const Input = ({
 
       return (
         <TextInput
-            className={`px-4 py-3 ${baseClasses} ${stateClasses} ${className}`}
+            className={`${baseClasses} ${stateClasses} ${className}`}
             placeholder={placeholder}
             placeholderTextColor={theme === "dark" ? "#A0A0A0" : "#606060"}
             value={value}

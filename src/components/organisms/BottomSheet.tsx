@@ -2,8 +2,9 @@ import BottomSheet, { BottomSheetScrollView, useBottomSheet } from "@gorhom/bott
 import { Children, useEffect, useMemo, useRef, useState } from "react";
 import { useUIStore } from "../../store/uiStore";
 import { Extrapolation, interpolate, useAnimatedStyle, useSharedValue } from "react-native-reanimated";
-    import { useWindowDimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 import { useSheetStore } from "../../store/sheetStore";
+import { useThemeStore } from "../../store/themeStore";
 
 export const GlobalBottomSheet = () => {
     const { sheetIndex, isOpen, closeSheet, setSheetIndex, content, snapPoints } = useSheetStore();
@@ -12,6 +13,7 @@ export const GlobalBottomSheet = () => {
     //const [sheetIndex, setSheetIndex] = useState(-1)
     const { hideTabBar, setHideTabBar } = useUIStore()
     const sheetPosition = useSharedValue(1);
+    const {theme} = useThemeStore();
 
     //test
     // const { animatedPosition } = useBottomSheet();
@@ -36,6 +38,8 @@ export const GlobalBottomSheet = () => {
     // });
     // console.log(animatedStyle);
     //test
+
+    const themed = theme === "dark" ? '#1c1c1c' : '#ffffff'
     
 
     const onSheetChange = (index: number) => {
@@ -61,10 +65,12 @@ export const GlobalBottomSheet = () => {
             snapPoints={snapPointss}
             onChange={onSheetChange}
             onAnimate={onSheetAnimate}
+            backgroundStyle={{
+                backgroundColor: themed,
+            }}
         >
-            <BottomSheetScrollView  className="px-3">
-                <>{content}</>
-            </BottomSheetScrollView>
+            <>{content}</>
+            
         </BottomSheet>
     )
 }
