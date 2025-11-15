@@ -3,21 +3,29 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { Workout, WorkoutExercise, WorkoutTemplate } from "../types/workout";
 import * as SQLite from "expo-sqlite"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { insertWorkout } from "../database/workoutDb";
+import { getAllWorkouts, insertWorkout } from "../database/workoutDb";
+import { getColumnsForType } from "../data/tableColumns";
 
 
 
 interface WorkoutStore {
   activeWorkout: Workout | null
+  workoutHistory: Workout[]
   templates: WorkoutTemplate[]
-  setTemplates: (templates: WorkoutTemplate[]) => void
 
+  // Create
+  setTemplates: (templates: WorkoutTemplate[]) => void
   startWorkout: (name: string, templateId?: string) => void
-  completeWorkout: () => void
   addExercise: (exercise: WorkoutExercise) => void
-  updateExercise: (id: string, updatedExercise: WorkoutExercise) => void
-  loadTemplate: (tempalteId: string) => void
   addTemplate: (template: WorkoutTemplate) => void
+
+  // Reads
+  loadWorkoutHistory: () => void;
+  loadTemplate: (tempalteId: string) => void
+  
+  // Updates
+  completeWorkout: () => void
+  updateExercise: (id: string, updatedExercise: WorkoutExercise) => void
 }
 
 
@@ -25,6 +33,7 @@ export const useWorkoutStore = create<WorkoutStore>()(
   persist(
     (set, get) => ({
       activeWorkout: null,
+      workoutHistory: [],
       templates: [],
 
       setTemplates: (templates) => set({ templates }),
@@ -46,28 +55,65 @@ export const useWorkoutStore = create<WorkoutStore>()(
         set({ activeWorkout: newWorkout })
       },
 
-      completeWorkout: () => {
+      loadWorkoutHistory: async () => {
+        const workouts = await getAllWorkouts();
+        set({ workoutHistory: workouts });
+      },
+
+      completeWorkout: async () => {
         const { activeWorkout } = get()
         if(!activeWorkout) return
+
         const completeWorkout = {
           ...activeWorkout,
             completed: true,
             endTime: Date.now(),
         }
-        insertWorkout(completeWorkout)
-        set({ activeWorkout })
+
+        insertWorkout(completeWorkout);
+
+        const workouts = await getAllWorkouts();
+        set({ activeWorkout: null, workoutHistory: workouts })
       },
 
-      addExercise: (exercise) => {
-        const { activeWorkout } = get()
-        if (!activeWorkout) return
-        set({
-          activeWorkout: {
-            ...activeWorkout,
-            exercises: [...activeWorkout.exercises, exercise],
-          },
-        })
-      },
+      // addExercise: (exercise) => {
+      //   const { activeWorkout } = get()
+      //   if (!activeWorkout) return
+      //   set({
+      //     activeWorkout: {
+      //       ...activeWorkout,
+      //       exercises: [...activeWorkout.exercises, exercise],
+      //     },
+      //   })
+      // },
+      addExercise: (exercise) =>
+        set((state) => {
+          if(!state.activeWorkout) return state;
+
+          const newExercise: WorkoutExercise = {
+            id: Date.now().toString(),
+            name: exercise.name,
+            type: exercise.type,
+            columns: getColumnsForType(exercise.type),
+            sets: [
+              {
+                id: "1",
+                setNumber: 1,
+                kg: 0,
+                reps: 0,
+                complete: false
+              },
+            ],
+            previousSets: [],
+          };
+
+          return {
+            activeWorkout: {
+              ...state.activeWorkout,
+              exercises: [...state.activeWorkout.exercises, newExercise],
+            },
+          };
+        }),
 
       updateExercise: (id, updatedExercise) => {
         const { activeWorkout } = get()
@@ -112,40 +158,3 @@ export const useWorkoutStore = create<WorkoutStore>()(
     }
   )
 )
-// export const useWorkoutStore = create<WorkoutStore>((set, get) => ({
-//   activeWorkout: null,
-
-//   startWorkout: (name) => {
-//     const newWorkout: Workout = {
-//       id: Date.now().toString(),
-//       name,
-//       startTime: Date.now(),
-//       exercises: []
-//     }
-//     set({ activeWorkout: newWorkout })
-//   },
-
-//   addExercise: (exercise) => {
-//     const { activeWorkout } = get()
-//     if (!activeWorkout) return
-//     set({
-//       activeWorkout: {
-//         ...activeWorkout,
-//         exercises: [...activeWorkout.exercises, exercise],
-//       },
-//     })
-//   },
-
-//   updateExercise: (id, updatedExercise) => {
-//     const { activeWorkout } = get()
-//     if (!activeWorkout) return
-//     set({
-//       activeWorkout: {
-//         ...activeWorkout,
-//         exercises: activeWorkout.exercises.map((ex) =>
-//           ex.id === id ? updatedExercise : ex
-//         ),
-//       },
-//     })
-//   },
-// }))

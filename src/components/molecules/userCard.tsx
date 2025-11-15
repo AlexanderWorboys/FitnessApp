@@ -14,7 +14,7 @@ interface UserCardProps {
 
 export const UserCard = ({
     username = "John Doe",
-    isVerified = true,
+    isVerified = false,
     verification = "Qualified Personal Trainer",
     postType = "Workout By",
     className = ""

@@ -27,10 +27,6 @@ export const Input = ({
     className = ""
 }: InputProps) => {
     const { theme } = useThemeStore();
-    // console.log("inputVarients:", inputVariants);
-    // console.log("variant:", variant);
-    // console.log("theme:", theme);
-    // console.log("inputVarients[variant]:", inputVariants[variant]);
     const baseClasses = inputVariants[variant][theme];
     const stateClasses = inputStateVariants[state];
     // const themedClass =

@@ -1,4 +1,4 @@
-export const timedColumns = [
+export const distanceColumns = [
   { key: "set", label: "Set", width: "w-12", align: "center" },
   { key: "previous", label: "Previous", width: "min-w-[80px]", align: "center" },
   { key: "Time", label: "KM", width: "w-16", align: "center", editable: true, type: "input" },

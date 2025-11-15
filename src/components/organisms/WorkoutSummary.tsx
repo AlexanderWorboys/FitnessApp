@@ -5,7 +5,7 @@ import { useThemeStore } from "../../store/themeStore";
 import Timer from "../molecules/Timer";
 import { Button, Icon, Input } from "../atoms";
 import { useCallback } from "react";
-import { useWorkoutStore } from "../../store/WorkoutStore";
+import { useWorkoutStore } from "../../store/workoutStore";
 import { useSheetStore } from "../../store/sheetStore";
 import { UserCard } from "../molecules/userCard";
 import { Divider } from "../atoms/Divider";
@@ -34,7 +34,7 @@ export const WorkoutSummary = ({ workout }: WorkoutSummaryProps) => {
                     <Button label="Finish" onPress={handleComplete} />
                 </View>
             </View>
-            <UserCard className="mb-4"/>
+            <UserCard username="Alex Worboys" isVerified={true} className="mb-4"/>
             <Input value={workout.name} variant="invisible" className="text-3xl" />
             <Input placeholder="notes..." variant="invisible"/>
             <Divider marginY="my-4"/>

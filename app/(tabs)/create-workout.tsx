@@ -1,5 +1,5 @@
 import { TouchableOpacity, View } from "react-native";
-import { useWorkoutStore } from "../../src/store/WorkoutStore"
+import { useWorkoutStore } from "../../src/store/workoutStore"
 import { Button, Text, ThemedView, ThemeToggle } from "../../src/components/atoms";
 import { useRef } from "react";
 import { ScrollView } from "react-native-gesture-handler";

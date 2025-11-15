@@ -6,10 +6,9 @@ import { ThemeProvider } from "../src/theme/ThemeProvider";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
-import { useWorkoutStore } from '../src/store/WorkoutStore';
 import { getAllTemplates, initWorkoutDb } from '../src/database/workoutDb';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { WorkoutSheet } from '../src/components/templates/WorkoutSheet';
+import { useWorkoutStore } from '../src/store/workoutStore';
 
 const MainLayout = () => {
   const setTemplates = useWorkoutStore((state) => state.setTemplates)
@@ -31,6 +30,7 @@ const MainLayout = () => {
   useEffect(() => {
     const setupDb = async () => {
       await initWorkoutDb()
+      useWorkoutStore.getState().loadWorkoutHistory();
       const templates = await getAllTemplates()
       setTemplates(templates)
     }

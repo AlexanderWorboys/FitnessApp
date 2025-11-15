@@ -1,6 +1,8 @@
 import { ReactNode } from "react"
 import { create } from "zustand"
 
+// storing bottom sheet data
+
 interface SheetStore {
   isOpen: boolean;
   content: ReactNode;

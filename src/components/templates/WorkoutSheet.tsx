@@ -1,6 +1,6 @@
 import BottomSheet, { BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet"
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { useWorkoutStore } from "../../store/WorkoutStore"
+import { useWorkoutStore } from "../../store/workoutStore"
 import { WorkoutSummary } from "../organisms/WorkoutSummary"
 import ExercisePanel from "../organisms/ExercisePanel"
 import { Button } from "../atoms"

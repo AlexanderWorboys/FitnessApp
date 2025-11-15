@@ -1,5 +1,5 @@
 import { FlatList, ScrollView, View, TouchableOpacity } from "react-native";
-import { useWorkoutStore } from "../../store/WorkoutStore";
+import { useWorkoutStore } from "../../store/workoutStore";
 import { WorkoutSummary } from "../organisms/WorkoutSummary";
 import ExercisePanel from "../organisms/ExercisePanel";
 import { ExerciseType, setEntry, WorkoutExercise } from "../../types/workout";
@@ -7,16 +7,20 @@ import { getAllWorkouts } from "../../database/workoutDb";
 import { Button, Text } from "../atoms";
 import { useSheetStore } from "../../store/sheetStore";
 import BottomSheet, { BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
+import AddExerciseModal from "../modals/AddExerciseModal";
 
 
 
 export const Workout = () => {
     const { activeWorkout, startWorkout, addExercise, completeWorkout } = useWorkoutStore();
-    const { sheetIndex} = useSheetStore();
+    const [showAddExerciseModal, setShowAddExerciseModal] = useState(false);
+    const { sheetIndex } = useSheetStore();
     const sheetRef = useRef<BottomSheet>(null)
     //const workouts = getAllWorkouts()
     const { isOpen, closeSheet } = useSheetStore();
+    const openModal = () => setShowAddExerciseModal(true);
+    const closeModal = () => setShowAddExerciseModal(false);
 
     if (!activeWorkout) {
         return (
@@ -47,8 +51,8 @@ export const Workout = () => {
     }
 
     const handleComplete = useCallback(async () => {
-            await completeWorkout()
-            closeSheet()
+        await completeWorkout()
+        closeSheet()
     }, [completeWorkout])
 
     return (<>
@@ -70,8 +74,10 @@ export const Workout = () => {
                         ))}
 
                         <View className="mt-6">
-                            <Button label="Add Exercise" onPress={handleAddExercise} />
+                            <Button label="Add Exercise" onPress={openModal} />
                         </View>
+
+
                         <View className="mt-6">
                             <Button label="Finish Workout" onPress={handleComplete} />
                         </View>
@@ -81,7 +87,12 @@ export const Workout = () => {
         ) : (
             <Text>No Active Workout</Text>
         )}
-        </>
+
+        <AddExerciseModal
+            visible={showAddExerciseModal}
+            onClose={closeModal}
+        />
+    </>
     );
 
 

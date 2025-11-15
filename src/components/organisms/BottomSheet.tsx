@@ -69,7 +69,9 @@ export const GlobalBottomSheet = () => {
                 backgroundColor: themed,
             }}
         >
-            <>{content}</>
+            <BottomSheetScrollView>
+                {content}
+            </BottomSheetScrollView>
             
         </BottomSheet>
     )

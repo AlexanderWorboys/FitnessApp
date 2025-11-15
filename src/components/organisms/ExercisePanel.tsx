@@ -4,7 +4,7 @@ import Table from "./Table";
 import { Button, View } from "react-native";
 import { Icon, Text, Row, Card, Input } from "../atoms";
 import { WorkoutExercise } from "../../types/workout"
-import { useWorkoutStore } from "../../store/WorkoutStore";
+import { useWorkoutStore } from "../../store/workoutStore";
 import { TableColumn } from "../molecules/TableRow";
 
 interface ExerciseSectionProps {

@@ -6,35 +6,35 @@ type Varient = "title" | "header" | "subheader" | "body" | "muted";
 interface Props extends TextProps {
     lightClassName?: string;
     darkClassName?: string;
-    varient? : Varient;
-    className? : string;
+    varient?: Varient;
+    className?: string;
 }
 
- const textVariants = {
-    title: "text-3xl font-inter-bold",
-  header: "text-xl font-inter-bold",
-  subheader: "text-lg font-semibold",
-  body: "text-inter",
-  muted: "text-inter-light",
+const textVariants = {
+    title: "text-4xl font-inter-bold",
+    header: "text-xl font-inter-bold",
+    subheader: "text-lg font-semibold",
+    body: "text-inter",
+    muted: "text-inter-light",
 };
 
-export const Text = ({  
-    lightClassName = "text-text-light", 
+export const Text = ({
+    lightClassName = "text-text-light",
     darkClassName = "text-text-dark",
-    varient = "body", 
-    className = "", 
-    ...props 
+    varient = "body",
+    className = "",
+    ...props
 }: Props) => {
-    const {theme} = useThemeStore();
+    const { theme } = useThemeStore();
 
     const colorClasses =
         varient === "muted"
             ? theme === "dark"
-            ? "text-text-muted-dark"
-            : "text-text-muted-light"
+                ? "text-text-muted-dark"
+                : "text-text-muted-light"
             : theme === "dark"
-            ? darkClassName
-            : lightClassName;
+                ? darkClassName
+                : lightClassName;
 
     const themedClass = `${textVariants[varient]} ${colorClasses} ${className}`;
     return <RNText className={themedClass} {...props} />
