@@ -16,7 +16,7 @@ export interface WorkoutExercise {
     name: string;
     type: ExerciseType;
     sets: setEntry[];
-    previousSets?: setEntry[];
+    previous?: setEntry[];
     columns?: any[]; // this links to the column definitions
 }
 

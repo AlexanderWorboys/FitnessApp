@@ -4,7 +4,8 @@ import { Workout, WorkoutExercise, WorkoutTemplate } from "../types/workout";
 import * as SQLite from "expo-sqlite"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { getAllWorkouts, insertWorkout } from "../database/workoutDb";
-import { getColumnsForType } from "../data/tableColumns";
+import { createEmptySet, getColumnsForType } from "../data/tableColumns";
+import { findPreviousExerciseSets } from "../utils/findPreviousExerciseSets";
 
 
 
@@ -90,21 +91,16 @@ export const useWorkoutStore = create<WorkoutStore>()(
         set((state) => {
           if(!state.activeWorkout) return state;
 
+          // This will need updating to workout id in the future
+          const previous = findPreviousExerciseSets(exercise.name, state.workoutHistory);
+
           const newExercise: WorkoutExercise = {
             id: Date.now().toString(),
             name: exercise.name,
             type: exercise.type,
             columns: getColumnsForType(exercise.type),
-            sets: [
-              {
-                id: "1",
-                setNumber: 1,
-                kg: 0,
-                reps: 0,
-                complete: false
-              },
-            ],
-            previousSets: [],
+            sets: [createEmptySet(exercise.type, 1)],
+            previous: previous ?? [],
           };
 
           return {

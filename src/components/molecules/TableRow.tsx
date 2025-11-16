@@ -13,6 +13,7 @@ export interface TableColumn {
     align?: "left" | "center" | "right";
     editable?: boolean;
     type?: "text" | "input" | "icon";
+    keyboardType: "numeric" | "default"
 }
 
 interface TableRowProps {
@@ -57,6 +58,7 @@ export const TableRow = ({
                             value={String(cellValue ?? "")}
                             onChangeText={(text) => onChange?.(col.key, text)}
                             className={`${col.width || "flex-1"} text-center py-2`}
+                            keyboardType={col.keyboardType || "default"}
                         />
                     )
                 }

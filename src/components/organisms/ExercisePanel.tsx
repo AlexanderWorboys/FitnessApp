@@ -6,6 +6,8 @@ import { Icon, Text, Row, Card, Input } from "../atoms";
 import { WorkoutExercise } from "../../types/workout"
 import { useWorkoutStore } from "../../store/workoutStore";
 import { TableColumn } from "../molecules/TableRow";
+import { createEmptySet } from "../../data/tableColumns";
+import { formatPreviousSet } from "../../utils/findPreviousExerciseSets";
 
 interface ExerciseSectionProps {
     exercise: WorkoutExercise;
@@ -18,14 +20,26 @@ const ExercisePanel = ({ exercise }: ExerciseSectionProps) => {
         updateExercise(exercise.id, { ...exercise, sets: updatedSets })
     }
 
+    // To review, checking for previous then formating previous
+    const formattedRows = exercise.sets.map((set, index) => {
+        const previous = exercise.previous?.[index];
+
+        return {
+            set: set.setNumber,
+            previous: previous
+                ? formatPreviousSet(previous, exercise.type)
+                : "-",
+            kg: set.kg ?? "",
+            reps: set.reps ?? ""
+        };
+    });
+
+
     const handleAddSet = () => {
-        const newSet = {
-            id: Date.now().toString(),
-            setNumber: exercise.sets.length + 1,
-            kg: 0,
-            reps: 0,
-            completed: false,
-        }
+        const newSet = createEmptySet(
+            exercise.type,
+            exercise.sets.length + 1
+        )
         handleRowChange([...exercise.sets, newSet])
     }
 
@@ -47,8 +61,8 @@ const ExercisePanel = ({ exercise }: ExerciseSectionProps) => {
                 <Input variant="invisible" placeholder="Notes..." />
             </View>
             <Table
-                columns={weightColumns as TableColumn[]}
-                data={exercise.sets}
+                columns={exercise.columns as TableColumn[]}
+                data={formattedRows}
                 onChange={handleRowChange}
                 //onTrailing={handleDelete}
                 //onLeading={handleEdit}

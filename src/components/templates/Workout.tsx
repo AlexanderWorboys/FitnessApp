@@ -17,38 +17,37 @@ export const Workout = () => {
     const [showAddExerciseModal, setShowAddExerciseModal] = useState(false);
     const { sheetIndex } = useSheetStore();
     const sheetRef = useRef<BottomSheet>(null)
-    //const workouts = getAllWorkouts()
     const { isOpen, closeSheet } = useSheetStore();
     const openModal = () => setShowAddExerciseModal(true);
     const closeModal = () => setShowAddExerciseModal(false);
 
-    if (!activeWorkout) {
-        return (
-            <View className="flex-1 items-center justify-center">
-                <Button label="Start New Workout" onPress={() => startWorkout("My Workout")} />
-            </View>
-        )
-    }
+    // if (!activeWorkout) {
+    //     return (
+    //         <View className="flex-1 items-center justify-center">
+    //             <Button label="Start New Workout" onPress={() => startWorkout("My Workout")} />
+    //         </View>
+    //     )
+    // }
 
-    const createNewSet = (n = 1): setEntry => ({
-        id: Date.now().toString(),
-        setNumber: n,
-        kg: 0,
-        reps: 0,
-        // note: use `complete` to match your type
-        complete: false,
-    });
+    // const createNewSet = (n = 1): setEntry => ({
+    //     id: Date.now().toString(),
+    //     setNumber: n,
+    //     kg: 0,
+    //     reps: 0,
+    //     // note: use `complete` to match your type
+    //     complete: false,
+    // });
 
-    const handleAddExercise = () => {
-        const newExercise: WorkoutExercise = {
-            id: Date.now().toString(),
-            name: "New Exercise",
-            type: "weight",            // OK because newExercise is typed WorkoutExercise
-            columns: [],               // optional, fine as []
-            sets: [createNewSet(1)],   // returns setEntry[]
-        };
-        addExercise(newExercise)
-    }
+    // const handleAddExercise = () => {
+    //     const newExercise: WorkoutExercise = {
+    //         id: Date.now().toString(),
+    //         name: "New Exercise",
+    //         type: "weight",            // OK because newExercise is typed WorkoutExercise
+    //         columns: [],               // optional, fine as []
+    //         sets: [createNewSet(1)],   // returns setEntry[]
+    //     };
+    //     addExercise(newExercise)
+    // }
 
     const handleComplete = useCallback(async () => {
         await completeWorkout()
@@ -85,7 +84,9 @@ export const Workout = () => {
                 )}
             </>
         ) : (
-            <Text>No Active Workout</Text>
+            <View className="flex-1 items-center justify-center">
+                <Button label="Start New Workout" onPress={() => startWorkout("My Workout")} />
+            </View>
         )}
 
         <AddExerciseModal

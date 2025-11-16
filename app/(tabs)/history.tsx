@@ -17,9 +17,20 @@ export default function HistoryScreen() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View className="mb-4">
-            <ListItem />
-            <Text>{item.name}</Text>
-            <Text>{formatDate(item.startTime)}</Text>
+            <ListItem title={item.name} subtext={formatDate(item.startTime)} />
+            {item.exercises.map((ex, index) => (
+              <>
+                <Text>{index}. {ex.name} | {ex.type}</Text>
+                {ex.sets.map((set, setIndex) => (
+                  <>
+                    {ex.type == "weight" && <Text>set {setIndex}. {set.kg} x {set.reps}</Text>}
+                    {ex.type == "timed" && <Text>set {setIndex}. {set.km} in {set.time}</Text>}
+                    
+                  </>
+                ))}
+              </>
+                
+            ))}
           </View>
         )}
       />
