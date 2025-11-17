@@ -6,10 +6,12 @@ export const findPreviousExerciseSets = (
 ): setEntry[] | null => {
     for(let i = workouts.length -1; i >= 0; i--) {
         const workout = workouts[i];
+        console.log(i)
 
         const match = workout.exercises.find(
             (ex) => ex.name.toLowerCase() === exerciseName.toLowerCase()
         );
+        console.log(match?.name)
 
         if(match && match.sets.length > 0) {
             return match.sets;
@@ -25,7 +27,7 @@ export const formatPreviousSet = (
 ) => {
   switch (type) {
     case "weight":
-      return `${prev.kg ?? 0}kg × ${prev.reps ?? 0}`;
+      return `${prev.kg ?? 0}kg x ${prev.reps ?? 0}`;
     case "timed":
       return `${prev.time ?? "0:00"}`;
     case "distance":
