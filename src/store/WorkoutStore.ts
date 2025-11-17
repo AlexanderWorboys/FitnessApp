@@ -23,10 +23,11 @@ interface WorkoutStore {
   // Reads
   loadWorkoutHistory: () => void;
   loadTemplate: (tempalteId: string) => void
-  
+
   // Updates
-  completeWorkout: () => void
+  updateWorkoutName: (id: string, name: string) => void
   updateExercise: (id: string, updatedExercise: WorkoutExercise) => void
+  completeWorkout: () => void
 }
 
 
@@ -43,7 +44,7 @@ export const useWorkoutStore = create<WorkoutStore>()(
         const template = templateId
           ? get().templates.find((t) => t.id === templateId)
           : null
-        
+
         const newWorkout: Workout = {
           id: Date.now().toString(),
           name,
@@ -63,12 +64,12 @@ export const useWorkoutStore = create<WorkoutStore>()(
 
       completeWorkout: async () => {
         const { activeWorkout } = get()
-        if(!activeWorkout) return
+        if (!activeWorkout) return
 
         const completeWorkout = {
           ...activeWorkout,
-            completed: true,
-            endTime: Date.now(),
+          completed: true,
+          endTime: Date.now(),
         }
 
         insertWorkout(completeWorkout);
@@ -89,7 +90,7 @@ export const useWorkoutStore = create<WorkoutStore>()(
       // },
       addExercise: (exercise) =>
         set((state) => {
-          if(!state.activeWorkout) return state;
+          if (!state.activeWorkout) return state;
 
           // This will need updating to workout id in the future
           const previous = findPreviousExerciseSets(exercise.name, state.workoutHistory);
@@ -121,6 +122,18 @@ export const useWorkoutStore = create<WorkoutStore>()(
             exercises: activeWorkout.exercises.map((ex) =>
               ex.id === id ? updatedExercise : ex
             ),
+          },
+        })
+      },
+
+      updateWorkoutName: (id, name) => {
+        const { activeWorkout } = get()
+        if (!activeWorkout || activeWorkout.id !== id) return
+
+        set({
+          activeWorkout: {
+            ...activeWorkout,
+            name, // overwrite just the name
           },
         })
       },

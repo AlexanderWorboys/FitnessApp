@@ -9,6 +9,7 @@ import { useWorkoutStore } from "../../store/workoutStore";
 import { useSheetStore } from "../../store/sheetStore";
 import { UserCard } from "../molecules/userCard";
 import { Divider } from "../atoms/Divider";
+import { ChipGroup } from "../molecules/ChipGroup";
 
 
 interface WorkoutSummaryProps {
@@ -17,13 +18,13 @@ interface WorkoutSummaryProps {
 
 export const WorkoutSummary = ({ workout }: WorkoutSummaryProps) => {
     const { theme } = useThemeStore();
-    const { completeWorkout } = useWorkoutStore();
+    const { completeWorkout, updateWorkoutName } = useWorkoutStore();
     const { closeSheet } = useSheetStore();
 
     const handleComplete = useCallback(async () => {
-                await completeWorkout()
-                closeSheet()
-        }, [completeWorkout])
+        await completeWorkout()
+        closeSheet()
+    }, [completeWorkout])
 
     return (
         <>
@@ -34,10 +35,11 @@ export const WorkoutSummary = ({ workout }: WorkoutSummaryProps) => {
                     <Button label="Finish" onPress={handleComplete} />
                 </View>
             </View>
-            <UserCard username="Alex Worboys" isVerified={true} className="mb-4"/>
-            <Input value={workout.name} variant="invisible" className="text-3xl" />
-            <Input placeholder="notes..." variant="invisible"/>
-            <Divider marginY="my-4"/>
+            <UserCard username="Alex Worboys" isVerified={true} className="mb-4" />
+            <Input value={workout.name} onChangeText={(e) => updateWorkoutName(workout.id, e)} variant="invisible" className="text-3xl" />
+            <ChipGroup items={["60 - 90 Mins", "Chest"]} className="mt-4" />
+            <Input placeholder="notes..." variant="invisible" className="mt-4" />
+            <Divider marginY="my-4" />
         </>
     )
 }

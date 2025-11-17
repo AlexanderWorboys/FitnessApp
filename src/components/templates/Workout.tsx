@@ -1,9 +1,8 @@
-import { FlatList, ScrollView, View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { useWorkoutStore } from "../../store/workoutStore";
 import { WorkoutSummary } from "../organisms/WorkoutSummary";
 import ExercisePanel from "../organisms/ExercisePanel";
-import { ExerciseType, setEntry, WorkoutExercise } from "../../types/workout";
-import { getAllWorkouts } from "../../database/workoutDb";
+import { WorkoutExercise } from "../../types/workout";
 import { Button, Text } from "../atoms";
 import { useSheetStore } from "../../store/sheetStore";
 import BottomSheet, { BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
@@ -17,37 +16,9 @@ export const Workout = () => {
     const [showAddExerciseModal, setShowAddExerciseModal] = useState(false);
     const { sheetIndex } = useSheetStore();
     const sheetRef = useRef<BottomSheet>(null)
-    const { isOpen, closeSheet } = useSheetStore();
+    const {  closeSheet } = useSheetStore();
     const openModal = () => setShowAddExerciseModal(true);
     const closeModal = () => setShowAddExerciseModal(false);
-
-    // if (!activeWorkout) {
-    //     return (
-    //         <View className="flex-1 items-center justify-center">
-    //             <Button label="Start New Workout" onPress={() => startWorkout("My Workout")} />
-    //         </View>
-    //     )
-    // }
-
-    // const createNewSet = (n = 1): setEntry => ({
-    //     id: Date.now().toString(),
-    //     setNumber: n,
-    //     kg: 0,
-    //     reps: 0,
-    //     // note: use `complete` to match your type
-    //     complete: false,
-    // });
-
-    // const handleAddExercise = () => {
-    //     const newExercise: WorkoutExercise = {
-    //         id: Date.now().toString(),
-    //         name: "New Exercise",
-    //         type: "weight",            // OK because newExercise is typed WorkoutExercise
-    //         columns: [],               // optional, fine as []
-    //         sets: [createNewSet(1)],   // returns setEntry[]
-    //     };
-    //     addExercise(newExercise)
-    // }
 
     const handleComplete = useCallback(async () => {
         await completeWorkout()

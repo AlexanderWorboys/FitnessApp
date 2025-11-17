@@ -6,7 +6,7 @@ export const findPreviousExerciseSets = (
 ): setEntry[] | null => {
     for(let i = workouts.length -1; i >= 0; i--) {
         const workout = workouts[i];
-        console.log(i)
+        console.log(i, workout.name)
 
         const match = workout.exercises.find(
             (ex) => ex.name.toLowerCase() === exerciseName.toLowerCase()

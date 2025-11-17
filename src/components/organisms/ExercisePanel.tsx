@@ -17,6 +17,7 @@ const ExercisePanel = ({ exercise }: ExerciseSectionProps) => {
     const { updateExercise } = useWorkoutStore();
 
     const handleRowChange = (updatedSets: any[]) => {
+        console.log("handleRowChange")
         updateExercise(exercise.id, { ...exercise, sets: updatedSets })
     }
 
@@ -30,7 +31,8 @@ const ExercisePanel = ({ exercise }: ExerciseSectionProps) => {
                 ? formatPreviousSet(previous, exercise.type)
                 : "-",
             kg: set.kg ?? "",
-            reps: set.reps ?? ""
+            reps: set.reps ?? "",
+            complete: set.complete
         };
     });
 
@@ -62,7 +64,8 @@ const ExercisePanel = ({ exercise }: ExerciseSectionProps) => {
             </View>
             <Table
                 columns={exercise.columns as TableColumn[]}
-                data={formattedRows}
+                //data={formattedRows} //This breaks the complete check, needs reviewing
+                data={exercise.sets}
                 onChange={handleRowChange}
                 //onTrailing={handleDelete}
                 //onLeading={handleEdit}
