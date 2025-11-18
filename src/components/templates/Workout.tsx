@@ -12,18 +12,22 @@ import AddExerciseModal from "../modals/AddExerciseModal";
 
 
 export const Workout = () => {
-    const { activeWorkout, startWorkout, addExercise, completeWorkout } = useWorkoutStore();
+    const { activeWorkout, startWorkout, addExercise, completeWorkout, cancelWorkout } = useWorkoutStore();
     const [showAddExerciseModal, setShowAddExerciseModal] = useState(false);
-    const { sheetIndex } = useSheetStore();
+    const { sheetIndex, closeSheet } = useSheetStore();
     const sheetRef = useRef<BottomSheet>(null)
-    const {  closeSheet } = useSheetStore();
-    const openModal = () => setShowAddExerciseModal(true);
-    const closeModal = () => setShowAddExerciseModal(false);
+    const openAddExerciseModal = () => setShowAddExerciseModal(true);
+    const closeAddExerciseModal = () => setShowAddExerciseModal(false);
 
     const handleComplete = useCallback(async () => {
         await completeWorkout()
         closeSheet()
     }, [completeWorkout])
+
+    const handleCancel = () => {
+        closeSheet();
+        cancelWorkout()
+    }
 
     return (<>
         {activeWorkout ? (
@@ -44,12 +48,16 @@ export const Workout = () => {
                         ))}
 
                         <View className="mt-6">
-                            <Button label="Add Exercise" onPress={openModal} />
+                            <Button label="Add Exercise" onPress={openAddExerciseModal} />
                         </View>
 
 
                         <View className="mt-6">
                             <Button label="Finish Workout" onPress={handleComplete} />
+                        </View>
+
+                        <View className="mt-6">
+                            <Button label="Cancel Workout" onPress={handleCancel} />
                         </View>
                     </BottomSheetScrollView>
                 )}
@@ -62,7 +70,7 @@ export const Workout = () => {
 
         <AddExerciseModal
             visible={showAddExerciseModal}
-            onClose={closeModal}
+            onClose={closeAddExerciseModal}
         />
     </>
     );

@@ -28,6 +28,9 @@ interface WorkoutStore {
   updateWorkoutName: (id: string, name: string) => void
   updateExercise: (id: string, updatedExercise: WorkoutExercise) => void
   completeWorkout: () => void
+
+  // Delete (cancel)
+  cancelWorkout: () => void
 }
 
 
@@ -160,6 +163,10 @@ export const useWorkoutStore = create<WorkoutStore>()(
         set((state) => ({
           templates: [...state.templates, { ...template, createdAt: Date.now() }],
         }))
+      },
+
+      cancelWorkout: () => {
+        set({ activeWorkout: null });
       },
     }),
     {

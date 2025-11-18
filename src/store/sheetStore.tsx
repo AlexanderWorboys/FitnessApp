@@ -16,7 +16,7 @@ interface SheetStore {
 export const useSheetStore = create<SheetStore>((set) => ({
   isOpen: false,
   content: null,
-  snapPoints: [ '100%'],
+  snapPoints: [ '95%'],
   sheetIndex: 0,
   openSheet: (content) => set({ isOpen: true, content }),
   closeSheet: () => set({ isOpen: false, content: null }),
