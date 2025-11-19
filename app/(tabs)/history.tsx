@@ -19,16 +19,16 @@ export default function HistoryScreen() {
           <View className="mb-4">
             <ListItem title={item.name} subtext={formatDate(item.startTime)} />
             {item.exercises.map((ex, index) => (
-              <>
+              <View key={`exercise=${item.id}-${index}`}>
                 <Text>{index}. {ex.name} | {ex.type}</Text>
                 {ex.sets.map((set, setIndex) => (
-                  <>
+                  <View key={`exercise=${item.id}-${index}-${setIndex}`}>
                     {ex.type == "weight" && <Text>set {setIndex}. {set.kg} x {set.reps}</Text>}
                     {ex.type == "timed" && <Text>set {setIndex}. {set.km} in {set.time}</Text>}
                     
-                  </>
+                  </View>
                 ))}
-              </>
+              </View>
                 
             ))}
           </View>

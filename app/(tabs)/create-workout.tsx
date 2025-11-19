@@ -3,7 +3,6 @@ import { useWorkoutStore } from "../../src/store/workoutStore"
 import { Button, Text, ThemedView, ThemeToggle } from "../../src/components/atoms";
 import { useRef } from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import { WorkoutSheet } from "../../src/components/templates/WorkoutSheet";
 import { useSheetStore } from "../../src/store/sheetStore";
 import { Workout } from "../../src/components/templates/Workout";
 

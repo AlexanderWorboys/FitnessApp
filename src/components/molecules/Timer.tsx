@@ -1,22 +1,8 @@
 import { useEffect, useState } from "react"
 import { Text } from "../atoms";
 
-const Timer = ({ startTime }: {startTime: number}) => {
-    const [elapsed, setElapsed] = useState(0);
-
-    useEffect(() => {
-        const startTimestamp = new Date(startTime).getTime();
-
-        const interval = setInterval(() => {
-            const now = Date.now();
-            const secondsElapsed = Math.floor((now - startTimestamp) / 1000);
-            setElapsed(secondsElapsed);
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, [startTime]);
-
-    const formatElapsed = (seconds: number) => {
+const TimerDisplay = ({ elapsed }: { elapsed: number }) => {
+  const formatElapsed = (seconds: number) => {
     const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
@@ -29,4 +15,5 @@ const Timer = ({ startTime }: {startTime: number}) => {
   return <Text varient="title">{formatElapsed(elapsed)}</Text>;
 };
 
-export default Timer;
+
+export default TimerDisplay;

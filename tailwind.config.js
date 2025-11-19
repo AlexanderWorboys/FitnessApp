@@ -18,6 +18,8 @@ module.exports = {
         // Primary brand colors
         "primary": "#28D8FF",
         "secondary": "2C2C2C",
+        //"danger": "FF0000",
+        //"blue": "1877F2",
 
         // Backgrounds
         "background-light": "#F9FAFB",

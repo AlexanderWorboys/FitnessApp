@@ -6,8 +6,10 @@ import { WorkoutExercise } from "../../types/workout";
 import { Button, Text } from "../atoms";
 import { useSheetStore } from "../../store/sheetStore";
 import BottomSheet, { BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import AddExerciseModal from "../modals/AddExerciseModal";
+import { Divider } from "../atoms/Divider";
+import TimerDisplay from "../molecules/Timer";
 
 
 
@@ -15,9 +17,24 @@ export const Workout = () => {
     const { activeWorkout, startWorkout, addExercise, completeWorkout, cancelWorkout } = useWorkoutStore();
     const [showAddExerciseModal, setShowAddExerciseModal] = useState(false);
     const { sheetIndex, closeSheet } = useSheetStore();
-    const sheetRef = useRef<BottomSheet>(null)
+    const sheetRef = useRef<BottomSheet>(null);
     const openAddExerciseModal = () => setShowAddExerciseModal(true);
     const closeAddExerciseModal = () => setShowAddExerciseModal(false);
+
+
+    const [elapsed, setElapsed] = useState(0);
+
+    useEffect(() => {
+            const startTimestamp = new Date(activeWorkout?.startTime).getTime();
+    
+            const interval = setInterval(() => {
+                const now = Date.now();
+                const secondsElapsed = Math.floor((now - startTimestamp) / 1000);
+                setElapsed(secondsElapsed);
+            }, 1000);
+    
+            return () => clearInterval(interval);
+        }, [activeWorkout?.startTime]);
 
     const handleComplete = useCallback(async () => {
         await completeWorkout()
@@ -33,15 +50,13 @@ export const Workout = () => {
         {activeWorkout ? (
             <>
                 {sheetIndex === 0 ? (
-                    <BottomSheetView className="flex-row justify-between items-center pb-20">
+                    <BottomSheetView className="flex-row justify-between items-center pb-20 px-4">
+                        <TimerDisplay elapsed={elapsed} />
                         <Text className="font-semibold">{activeWorkout.name}</Text>
-                        <TouchableOpacity onPress={() => sheetRef.current?.expand()}>
-                            <Text className="text-blue-500">Expand</Text>
-                        </TouchableOpacity>
                     </BottomSheetView>
                 ) : (
                     <BottomSheetScrollView className="px-3">
-                        <WorkoutSummary workout={activeWorkout} />
+                        <WorkoutSummary workout={activeWorkout} elapsed={elapsed} />
 
                         {activeWorkout?.exercises.map((exercise: WorkoutExercise) => (
                             <ExercisePanel key={exercise.id} exercise={exercise} />
@@ -51,13 +66,14 @@ export const Workout = () => {
                             <Button label="Add Exercise" onPress={openAddExerciseModal} />
                         </View>
 
+                        <Divider marginY="my-8" />
 
-                        <View className="mt-6">
+                        <View className="">
                             <Button label="Finish Workout" onPress={handleComplete} />
                         </View>
 
-                        <View className="mt-6">
-                            <Button label="Cancel Workout" onPress={handleCancel} />
+                        <View className="mt-6 mb-14">
+                            <Button variant="danger" label="Cancel Workout" onPress={handleCancel} />
                         </View>
                     </BottomSheetScrollView>
                 )}

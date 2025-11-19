@@ -2,7 +2,6 @@ import { View } from "react-native";
 import { Workout } from "../../types/workout";
 import { Text } from "../atoms/Text";
 import { useThemeStore } from "../../store/themeStore";
-import Timer from "../molecules/Timer";
 import { Button, Icon, Input } from "../atoms";
 import { useCallback } from "react";
 import { useWorkoutStore } from "../../store/workoutStore";
@@ -10,13 +9,15 @@ import { useSheetStore } from "../../store/sheetStore";
 import { UserCard } from "../molecules/userCard";
 import { Divider } from "../atoms/Divider";
 import { ChipGroup } from "../molecules/ChipGroup";
+import TimerDisplay from "../molecules/Timer";
 
 
 interface WorkoutSummaryProps {
     workout: Workout;
+    elapsed: number;
 }
 
-export const WorkoutSummary = ({ workout }: WorkoutSummaryProps) => {
+export const WorkoutSummary = ({ workout, elapsed }: WorkoutSummaryProps) => {
     const { theme } = useThemeStore();
     const { completeWorkout, updateWorkoutName } = useWorkoutStore();
     const { closeSheet } = useSheetStore();
@@ -28,8 +29,8 @@ export const WorkoutSummary = ({ workout }: WorkoutSummaryProps) => {
 
     return (
         <>
-            <View className="flex-1 flex-row mt-8 justify-between mb-4">
-                <Timer startTime={workout.startTime} />
+            <View className="flex-1 flex-row  justify-between mb-4">
+                <TimerDisplay elapsed={elapsed} />
                 <View className="flex-row items-center gap-2">
                     <Icon name="timer" size={32} />
                     <Button label="Finish" onPress={handleComplete} />

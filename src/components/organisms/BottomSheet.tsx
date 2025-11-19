@@ -65,6 +65,7 @@ export const GlobalBottomSheet = () => {
             snapPoints={snapPointss}
             onChange={onSheetChange}
             onAnimate={onSheetAnimate}
+            enableOverDrag={false}
             backgroundStyle={{
                 backgroundColor: themed,
             }}
