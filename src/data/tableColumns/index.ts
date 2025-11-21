@@ -4,7 +4,6 @@ import { timedColumns } from "./timedColumns";
 import { weightColumns } from "./weightColumns";
 
 export const getColumnsForType = (type: ExerciseType) => {
-    console.log(type)
     switch (type) {
         case "weight":
             return weightColumns;

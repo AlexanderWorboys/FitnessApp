@@ -8,6 +8,7 @@ import { useWorkoutStore } from "../../store/workoutStore";
 import { TableColumn } from "../molecules/TableRow";
 import { createEmptySet } from "../../data/tableColumns";
 import { formatPreviousSet } from "../../utils/findPreviousExerciseSets";
+import OptionsMenu from "../molecules/OptionsMenu";
 
 interface ExerciseSectionProps {
     exercise: WorkoutExercise;
@@ -17,7 +18,6 @@ const ExercisePanel = ({ exercise }: ExerciseSectionProps) => {
     const { updateExercise } = useWorkoutStore();
 
     const handleRowChange = (updatedSets: any[]) => {
-        console.log("handleRowChange")
         updateExercise(exercise.id, { ...exercise, sets: updatedSets })
     }
 
@@ -58,7 +58,10 @@ const ExercisePanel = ({ exercise }: ExerciseSectionProps) => {
             <View className="px-4 mb-2">
                 <View className="flex-row justify-between items-center">
                     <Text varient="subheader" className="flex-1">{exercise.name}</Text>
-                    <Icon name="ellipsis-horizontal-circle-outline" size={28} />
+                    <OptionsMenu
+                        iconSize={28}
+                        preset="workout"
+                    />
                 </View>
                 <Input variant="invisible" placeholder="Notes..." />
             </View>

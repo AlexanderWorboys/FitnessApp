@@ -97,7 +97,6 @@ export const useWorkoutStore = create<WorkoutStore>()(
 
           // This will need updating to workout id in the future
           const previous = findPreviousExerciseSets(exercise.name, state.workoutHistory);
-          console.log(previous);
 
           const newExercise: WorkoutExercise = {
             id: Date.now().toString(),
