@@ -2,8 +2,8 @@ import { FlatList, View } from "react-native";
 import { Card, ThemedView } from "../../src/components/atoms";
 import { ListItem } from "../../src/components/molecules/ListItem";
 import { Text } from "../../src/components/atoms";
-import { useWorkoutStore } from "../../src/store/workoutStore";
 import { formatDate } from "../../src/utils/formatDate";
+import { useWorkoutStore } from "../../src/store/workout/useWorkoutStore";
 
 export default function HistoryScreen() {
   const workoutHistory = useWorkoutStore((s) => s.workoutHistory);

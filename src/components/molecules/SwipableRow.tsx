@@ -39,7 +39,7 @@ export const SwipeableRow = ({
   }
 
   const pan = Gesture.Pan()
-    .activeOffsetX([-5, 5])
+    .activeOffsetX([-5, 5]) // prevents scroll conflict on scrollView, may switch to a hold swipe
     .onUpdate((event) => {
       translateX.value = Math.min(
         Math.max(event.translationX, -MAX_TRANSLATE),

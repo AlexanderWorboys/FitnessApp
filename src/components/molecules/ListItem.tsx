@@ -5,7 +5,8 @@ import { Icon, Text } from "../atoms"
 interface ListItemProps {
     title: string;
     subtext: string;
-    actions?: () => void;
+    onPress?: () => void;
+    popOverActions?: () => void;
 }
 
 export const ListItem = ({

@@ -1,5 +1,4 @@
 import { View, TouchableOpacity } from "react-native";
-import { useWorkoutStore } from "../../store/workoutStore";
 import { WorkoutSummary } from "../organisms/WorkoutSummary";
 import ExercisePanel from "../organisms/ExercisePanel";
 import { WorkoutExercise } from "../../types/workout";
@@ -10,6 +9,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import AddExerciseModal from "../modals/AddExerciseModal";
 import { Divider } from "../atoms/Divider";
 import TimerDisplay from "../molecules/Timer";
+import { useWorkoutStore } from "../../store/workout/useWorkoutStore";
 
 
 

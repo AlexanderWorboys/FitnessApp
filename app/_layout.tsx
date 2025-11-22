@@ -8,8 +8,8 @@ import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import { getAllTemplates, initWorkoutDb } from '../src/database/workoutDb';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { useWorkoutStore } from '../src/store/workoutStore';
 import { PortalProvider } from '@gorhom/portal';
+import { useWorkoutStore } from '../src/store/workout/useWorkoutStore';
 
 const MainLayout = () => {
   const setTemplates = useWorkoutStore((state) => state.setTemplates)

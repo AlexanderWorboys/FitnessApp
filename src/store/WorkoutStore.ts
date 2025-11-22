@@ -31,10 +31,11 @@ interface WorkoutStore {
 
   // Delete (cancel)
   cancelWorkout: () => void
+  deleteExercise: (id: string) => void
 }
 
 
-export const useWorkoutStore = create<WorkoutStore>()(
+export const useOldWorkoutStore = create<WorkoutStore>()(
   persist(
     (set, get) => ({
       activeWorkout: null,
@@ -167,6 +168,18 @@ export const useWorkoutStore = create<WorkoutStore>()(
       cancelWorkout: () => {
         set({ activeWorkout: null });
       },
+
+      deleteExercise: (id) => {
+        const { activeWorkout } = get()
+        if(!activeWorkout) return
+        set({
+          activeWorkout: {
+            ...activeWorkout,
+            exercises: activeWorkout.exercises.filter((ex) => ex.id !== id),
+          },
+        })
+      }
+
     }),
     {
       name: "workout-storage",

@@ -54,20 +54,29 @@ export default function TabBar() {
                     }}
                 />
                 <Tabs.Screen
+                    name="explore"
+                    options={{
+                        title: "Explore",
+                        tabBarIcon: ({ color, size }) => (
+                            <Ionicons name="search" color={color} size={size} />
+                        ),
+                    }}
+                />
+                <Tabs.Screen
                     name="create-workout"
                     options={{
-                        title: "Create Workout",
+                        title: "Create",
                         tabBarIcon: ({ color, size }) => (
-                            <Ionicons name="fitness-outline" color={color} size={size} />
+                            <Ionicons name="add-circle" color={color} size={size} />
                         ),
                     }}
                 />
                 <Tabs.Screen
                     name="history"
                     options={{
-                        title: "History",
+                        title: "Logs",
                         tabBarIcon: ({ color, size }) => (
-                            <Ionicons name="time-outline" color={color} size={size} />
+                            <Ionicons name="book" color={color} size={size} />
                         ),
                     }}
                 />

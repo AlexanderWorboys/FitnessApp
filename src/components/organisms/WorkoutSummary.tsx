@@ -4,12 +4,12 @@ import { Text } from "../atoms/Text";
 import { useThemeStore } from "../../store/themeStore";
 import { Button, Icon, Input } from "../atoms";
 import { useCallback } from "react";
-import { useWorkoutStore } from "../../store/workoutStore";
 import { useSheetStore } from "../../store/sheetStore";
 import { UserCard } from "../molecules/userCard";
 import { Divider } from "../atoms/Divider";
 import { ChipGroup } from "../molecules/ChipGroup";
 import TimerDisplay from "../molecules/Timer";
+import { useWorkoutStore } from "../../store/workout/useWorkoutStore";
 
 
 interface WorkoutSummaryProps {

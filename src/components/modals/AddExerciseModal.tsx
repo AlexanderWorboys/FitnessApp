@@ -1,10 +1,12 @@
 import { FlatList, Modal, TouchableOpacity } from "react-native";
 import { useExerciseLibrary } from "../../store/exerciseLibrary";
-import { useWorkoutStore } from "../../store/workoutStore";
 import { Card, Input, ThemedView } from "../atoms";
 import { useState } from "react";
 import { ListItem } from "../molecules/ListItem";
 import { Divider } from "../atoms/Divider";
+import { ChipGroup } from "../molecules/ChipGroup";
+import { Chip } from "../atoms/Chip";
+import { useWorkoutStore } from "../../store/workout/useWorkoutStore";
 
 interface ModalProps {
     visible: boolean;
@@ -35,7 +37,7 @@ export default function AddExerciseModal({ visible, onClose }: ModalProps) {
             >
                 <TouchableOpacity
                     activeOpacity={1}
-                    onPress={() => {}}
+                    onPress={() => { }}
                     className="w-[85%] max-h-[70%]"
                 >
                     <Card className="rounded-2xl px-2 pt-2 mb-4" >
@@ -44,16 +46,21 @@ export default function AddExerciseModal({ visible, onClose }: ModalProps) {
                             className=" rounded-full mb-2"
                         />
 
+                        <ChipGroup
+                            items={["Type", "Machine"]}
+                            className="my-4"
+                        />
+
                         <FlatList
                             data={filtered}
                             keyExtractor={(item) => item.id}
                             renderItem={({ item }) => (
-                            <>
-                                <TouchableOpacity onPress={() => handleSelectExercise(item)}>
-                                    <ListItem title={item.name} subtext={`${item.muscleGroup} | ${item.equipment}`}/>
-                                </TouchableOpacity>
-                                <Divider marginY="my-1" />
-                            </>
+                                <>
+                                    <TouchableOpacity onPress={() => handleSelectExercise(item)}>
+                                        <ListItem title={item.name} subtext={`${item.muscleGroup} | ${item.equipment}`} />
+                                    </TouchableOpacity>
+                                    <Divider marginY="my-1" />
+                                </>
                             )}
                         />
                     </Card>

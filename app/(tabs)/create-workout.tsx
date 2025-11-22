@@ -1,10 +1,10 @@
 import { TouchableOpacity, View } from "react-native";
-import { useWorkoutStore } from "../../src/store/workoutStore"
 import { Button, Text, ThemedView, ThemeToggle } from "../../src/components/atoms";
 import { useRef } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { useSheetStore } from "../../src/store/sheetStore";
 import { Workout } from "../../src/components/templates/Workout";
+import { useWorkoutStore } from "../../src/store/workout/useWorkoutStore";
 
 export default function CreateWorkoutScreen() {
     const sheetRef = useRef<any>(null)

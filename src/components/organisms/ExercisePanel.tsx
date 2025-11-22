@@ -4,18 +4,18 @@ import Table from "./Table";
 import { Button, View } from "react-native";
 import { Icon, Text, Row, Card, Input } from "../atoms";
 import { WorkoutExercise } from "../../types/workout"
-import { useWorkoutStore } from "../../store/workoutStore";
 import { TableColumn } from "../molecules/TableRow";
 import { createEmptySet } from "../../data/tableColumns";
 import { formatPreviousSet } from "../../utils/findPreviousExerciseSets";
 import OptionsMenu from "../molecules/OptionsMenu";
+import { useWorkoutStore } from "../../store/workout/useWorkoutStore";
 
 interface ExerciseSectionProps {
     exercise: WorkoutExercise;
 }
 
 const ExercisePanel = ({ exercise }: ExerciseSectionProps) => {
-    const { updateExercise } = useWorkoutStore();
+    const { updateExercise, deleteExercise } = useWorkoutStore();
 
     const handleRowChange = (updatedSets: any[]) => {
         updateExercise(exercise.id, { ...exercise, sets: updatedSets })
@@ -45,13 +45,17 @@ const ExercisePanel = ({ exercise }: ExerciseSectionProps) => {
         handleRowChange([...exercise.sets, newSet])
     }
 
-    const handleDelete = (index: number) => {
+    const handleDeleteSet = (index: number) => {
         //setTableData((prev) => prev.filter((_, i) => i !== index))
         console.log(index)
     }
 
     const handleEdit = (index: number) => {
         console.log("Edit row:", index)
+    }
+
+    const handleDeleteExercise = () => {
+        deleteExercise(exercise.id);
     }
 
     return (
@@ -62,17 +66,17 @@ const ExercisePanel = ({ exercise }: ExerciseSectionProps) => {
                     <OptionsMenu
                         iconSize={28}
                         preset="exercise"
-                        actions={{ delete: () => console.log(exercise.name)}}
+                        actions={{ delete: handleDeleteExercise}}
                     />
                 </View>
-                <Input variant="invisible" placeholder="Notes..." />
+                <Input variant="invisible" placeholder="Notes..." className="my-2"/>
             </View>
             <Table
                 columns={exercise.columns as TableColumn[]}
                 //data={formattedRows} //This breaks the complete check, needs reviewing
                 data={exercise.sets}
                 onChange={handleRowChange}
-                onTrailing={handleDelete}
+                onTrailing={handleDeleteSet}
                 //onLeading={handleEdit}
                 className="rounded-b-3xl"
                 footer={<Button title="Add Set" onPress={handleAddSet} />}

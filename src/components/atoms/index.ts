@@ -6,3 +6,5 @@ export { ThemeToggle } from "./ThemeToggle";
 export { Row } from "./Row";
 export { ThemedView } from "./ThemedView";
 export { Card } from "./Card";
+export { Avatar } from "./Avatar";
+export { Chip } from "./Chip";
