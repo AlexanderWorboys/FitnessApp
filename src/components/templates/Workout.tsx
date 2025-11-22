@@ -55,7 +55,7 @@ export const Workout = () => {
                         <Text className="font-semibold">{activeWorkout.name}</Text>
                     </BottomSheetView>
                 ) : (
-                    <BottomSheetScrollView className="px-3">
+                    <View className="px-4">
                         <WorkoutSummary workout={activeWorkout} elapsed={elapsed} />
 
                         {activeWorkout?.exercises.map((exercise: WorkoutExercise) => (
@@ -75,7 +75,7 @@ export const Workout = () => {
                         <View className="mt-6 mb-14">
                             <Button variant="danger" label="Cancel Workout" onPress={handleCancel} />
                         </View>
-                    </BottomSheetScrollView>
+                    </View>
                 )}
             </>
         ) : (

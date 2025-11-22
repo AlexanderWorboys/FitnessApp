@@ -35,32 +35,10 @@ export default function Popover({ children }: { children: ReactNode }) {
 
       const openPopover = () => {
         triggerRef.current?.measureInWindow((x, y, w, h) => {
-            console.log("measurement x:", x, " y:", y, " w:", w, " h:", h)
           setAnchor({ x, y, w, h });
           setOpen(true);
         });
       };
-
-    // const openPopover = () => {
-    //     const handle = findNodeHandle(triggerRef.current);
-
-    //     if (!handle) return;
-
-    //     UIManager.measure(
-    //         handle,
-    //         (
-    //             _x: number,
-    //             _y: number,
-    //             width: number,
-    //             height: number,
-    //             pageX: number,
-    //             pageY: number
-    //         ) => {
-    //             setAnchor({ x: pageX, y: pageY, w: width, h: height });
-    //             setOpen(true);
-    //         }
-    //     );
-    // };
 
     const closePopover = () => setOpen(false);
 

@@ -7,37 +7,12 @@ import { useSheetStore } from "../../store/sheetStore";
 import { useThemeStore } from "../../store/themeStore";
 
 export const GlobalBottomSheet = () => {
-    const { sheetIndex, isOpen, closeSheet, setSheetIndex, content, snapPoints } = useSheetStore();
+    const { isOpen, closeSheet, setSheetIndex, content, snapPoints } = useSheetStore();
     const sheetRef = useRef<BottomSheet>(null)
     const snapPointss = useMemo(() => snapPoints, [])
-    //const [sheetIndex, setSheetIndex] = useState(-1)
     const { hideTabBar, setHideTabBar } = useUIStore()
     const sheetPosition = useSharedValue(1);
     const {theme} = useThemeStore();
-
-    //test
-    // const { animatedPosition } = useBottomSheet();
-    // const { height: screenHeight } = useWindowDimensions();
-    // const snapPointValues = useMemo(() => {
-    //     return snapPoints.map(pct => screenHeight * (parseFloat(pct) / 100));
-    // }, [screenHeight]);
-
-
-    // const animatedStyle = useAnimatedStyle(() => {
-    //     const progress = interpolate(
-    //         animatedPosition.value,
-    //         [snapPointValues[0], snapPointValues[1]],
-    //         [0, 1],
-    //         Extrapolation.CLAMP
-    //     );
-
-    //     return {
-    //         opacity: progress,
-    //         transform: [{ scale: progress }],
-    //     };
-    // });
-    // console.log(animatedStyle);
-    //test
 
     const themed = theme === "dark" ? '#1c1c1c' : '#ffffff'
     
@@ -49,7 +24,6 @@ export const GlobalBottomSheet = () => {
     }
 
     const onSheetAnimate = (index: number, position: number) => {
-        console.log(index, position)
         sheetPosition.value = position; // Track the sheet's position in real-time
   };
 
@@ -69,6 +43,7 @@ export const GlobalBottomSheet = () => {
             backgroundStyle={{
                 backgroundColor: themed,
             }}
+            //simultaneousHandlers={scrollView}
         >
             <BottomSheetScrollView>
                 {content}

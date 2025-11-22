@@ -6,7 +6,7 @@ type postType = "" | "Workout By" | "Recipe By" | "Summary By" | "Route Ran By";
 
 interface UserCardProps {
     username: string,
-    isVerified: boolean,
+    isVerified?: boolean,
     verification?: string,
     postType?: postType
     className?: string

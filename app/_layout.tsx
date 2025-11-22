@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { getAllTemplates, initWorkoutDb } from '../src/database/workoutDb';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { useWorkoutStore } from '../src/store/workoutStore';
+import { PortalProvider } from '@gorhom/portal';
 
 const MainLayout = () => {
   const setTemplates = useWorkoutStore((state) => state.setTemplates)
@@ -42,9 +43,11 @@ const MainLayout = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <BottomSheetModalProvider>
-        <ThemeProvider>
-          <Stack screenOptions={{ headerShown: false }} />
-        </ThemeProvider>
+        <PortalProvider>
+          <ThemeProvider>
+            <Stack screenOptions={{ headerShown: false }} />
+          </ThemeProvider>
+        </PortalProvider>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>
   )

@@ -4,26 +4,31 @@ import Popover from "../popover/Popover";
 import PopoverTrigger from "../popover/PopoverTrigger";
 import { Icon } from "../atoms";
 import { Pressable } from "react-native";
-import { MenuPreset, menuPresets } from "../../data/OptionsMenu/presets";
+import { MenuPreset, menuPresets, PopoverMenuActions } from "../../data/OptionsMenu/presets";
 
-interface OptionMenuProps {
-    preset?: MenuPreset;
+
+
+interface OptionMenuProps<P extends MenuPreset> {
+    preset?: P
     items?: PopoverItem[];
+    actions?: PopoverMenuActions;
     iconName?: keyof typeof Ionicons.glyphMap;
     iconSize?: number;
     iconColor?: string;
     children?: React.ReactNode; // THis is used for overiding trigger to something other than an icon
 }
 
-const OptionsMenu = ({
+const OptionsMenu = <P extends MenuPreset>({
     preset,
     items,
+    actions,
     iconName = "ellipsis-vertical",
     iconSize = 20,
     iconColor,
     children
-}: OptionMenuProps) => {
-    const finalItems = preset ? menuPresets[preset] : items ?? [];
+}: OptionMenuProps<P>) => {
+    console.log(actions?.edit);
+    const finalItems = preset ? menuPresets[preset](actions ?? {}) : items ?? [];
     
     return (
         <Popover>

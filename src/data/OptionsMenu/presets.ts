@@ -1,57 +1,69 @@
+import { Ionicons } from "@expo/vector-icons";
 import { PopoverItem } from "../../components/popover/PopoverMenu";
 
-export type MenuPreset = "workout" | "exercise" | "recipe" | "post";
+//export type MenuPreset = "workout" | "exercise" | "recipe" | "post";
 
-export const menuPresets: Record<MenuPreset, PopoverItem[]> = {
-    workout: [
+export type PopoverMenuActions = {
+  edit?: () => void;
+  delete?: () => void;
+  report?: () => void;
+};
+
+export const menuPresets = {
+    workout: (actions: PopoverMenuActions): PopoverItem[] => [
         {
             label: "Edit Workout",
             icon: "pencil",
-            onPress: () => {},
+            onPress: actions.edit,
         },
         {
             label: "Delete Workout",
             icon: "trash",
-            onPress: () => {},
+            destructive: true,
+            onPress: actions.delete,
         }
     ],
 
-    exercise: [
+    exercise: (actions: PopoverMenuActions): PopoverItem[] =>  [
         {
-            label: "Delete Exercise",
+            label: "Remove Exercise",
             icon: "trash",
-            onPress: () => {},
+            onPress: actions.delete,
         }
     ],
 
-    recipe: [
+    recipe: (actions: PopoverMenuActions): PopoverItem[] =>  [
         {
             label: "Edit Recipe",
-            icon: "pencil",
-            onPress: () => {},
+            icon: "pencil" as keyof typeof Ionicons.glyphMap,
+            onPress: actions.edit,
         },
         {
             label: "Delete Recipe",
             icon: "trash",
-            onPress: () => {},
+            destructive: true,
+            onPress: actions.delete,
         }
     ],
 
-    post: [
+    post: (actions: PopoverMenuActions): PopoverItem[] =>  [
         {
             label: "Edit Post",
             icon: "pencil",
-            onPress: () => {},
+            onPress: actions.edit,
         },
         {
             label: "Delete Post",
             icon: "trash",
-            onPress: () => {},
+            destructive: true,
+            onPress: actions.delete,
         },
         {
             label: "Report",
-            icon: "trash",
-            onPress: () => {},
+            icon: "flag",
+            onPress: actions.report,
         }
     ]
-}
+} as const;
+
+export type MenuPreset = keyof typeof menuPresets;
