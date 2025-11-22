@@ -45,13 +45,14 @@ const ExercisePanel = ({ exercise }: ExerciseSectionProps) => {
         handleRowChange([...exercise.sets, newSet])
     }
 
-    // const handleDelete = (index: number) => {
-    //     setTableData((prev) => prev.filter((_, i) => i !== index))
-    // }
+    const handleDelete = (index: number) => {
+        //setTableData((prev) => prev.filter((_, i) => i !== index))
+        console.log(index)
+    }
 
-    // const handleEdit = (index: number) => {
-    //     console.log("Edit row:", index)
-    // }
+    const handleEdit = (index: number) => {
+        console.log("Edit row:", index)
+    }
 
     return (
         <Card className="pt-4 mt-4 rounded-3xl">
@@ -60,7 +61,8 @@ const ExercisePanel = ({ exercise }: ExerciseSectionProps) => {
                     <Text varient="subheader" className="flex-1">{exercise.name}</Text>
                     <OptionsMenu
                         iconSize={28}
-                        preset="workout"
+                        preset="exercise"
+                        actions={{ delete: () => console.log(exercise.name)}}
                     />
                 </View>
                 <Input variant="invisible" placeholder="Notes..." />
@@ -70,7 +72,7 @@ const ExercisePanel = ({ exercise }: ExerciseSectionProps) => {
                 //data={formattedRows} //This breaks the complete check, needs reviewing
                 data={exercise.sets}
                 onChange={handleRowChange}
-                //onTrailing={handleDelete}
+                onTrailing={handleDelete}
                 //onLeading={handleEdit}
                 className="rounded-b-3xl"
                 footer={<Button title="Add Set" onPress={handleAddSet} />}

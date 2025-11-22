@@ -28,6 +28,7 @@ export const menuPresets = {
         {
             label: "Remove Exercise",
             icon: "trash",
+            destructive: true,
             onPress: actions.delete,
         }
     ],

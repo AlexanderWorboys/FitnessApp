@@ -35,10 +35,12 @@ export default function PopoverMenu({ items }: { items: PopoverItem[] }) {
   if (left + MENU_WIDTH > SCREEN.width - MARGIN) {
     left = SCREEN.width - MENU_WIDTH - MARGIN;
   }
+  // Margin left
   if (left < MARGIN) {
     left = MARGIN;
   }
 
+  // sets where to animate from left/right top/bottom
   const originX = anchor.x < SCREEN.width / 2 ? 0 : MENU_WIDTH;
   const originY = enoughSpaceBelow ? 0 : MENU_WIDTH;
 
@@ -71,7 +73,7 @@ export default function PopoverMenu({ items }: { items: PopoverItem[] }) {
             key={i}
             onPress={() => {
               closePopover();
-              //setTimeout(item.onPress, 10);
+              setTimeout(() => item.onPress?.(), 10);
             }}
             style={{
               flexDirection: "row",

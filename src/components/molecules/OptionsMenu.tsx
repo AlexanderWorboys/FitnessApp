@@ -6,8 +6,6 @@ import { Icon } from "../atoms";
 import { Pressable } from "react-native";
 import { MenuPreset, menuPresets, PopoverMenuActions } from "../../data/OptionsMenu/presets";
 
-
-
 interface OptionMenuProps<P extends MenuPreset> {
     preset?: P
     items?: PopoverItem[];
@@ -27,7 +25,6 @@ const OptionsMenu = <P extends MenuPreset>({
     iconColor,
     children
 }: OptionMenuProps<P>) => {
-    console.log(actions?.edit);
     const finalItems = preset ? menuPresets[preset](actions ?? {}) : items ?? [];
     
     return (

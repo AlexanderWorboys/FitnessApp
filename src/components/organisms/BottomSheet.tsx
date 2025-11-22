@@ -43,7 +43,6 @@ export const GlobalBottomSheet = () => {
             backgroundStyle={{
                 backgroundColor: themed,
             }}
-            //simultaneousHandlers={scrollView}
         >
             <BottomSheetScrollView>
                 {content}

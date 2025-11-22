@@ -39,6 +39,7 @@ export const SwipeableRow = ({
   }
 
   const pan = Gesture.Pan()
+    .activeOffsetX([-5, 5])
     .onUpdate((event) => {
       translateX.value = Math.min(
         Math.max(event.translationX, -MAX_TRANSLATE),

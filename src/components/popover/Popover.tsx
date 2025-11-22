@@ -1,3 +1,4 @@
+import { Portal } from "@gorhom/portal";
 import React, { createContext, PropsWithChildren, ReactNode, useContext, useRef, useState } from "react";
 import { Modal, Pressable, View, findNodeHandle, UIManager } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
@@ -47,22 +48,24 @@ export default function Popover({ children }: { children: ReactNode }) {
             {children}
 
             {/* Render overlay only when open */}
-            <Modal transparent visible={open} animationType="none">
-                <Pressable
-                    onPress={closePopover}
-                    style={{ flex: 1 }}
-                >
-                    {/* Animated Wrapper */}
-                    <Animated.View
-                        entering={FadeIn.duration(120)}
-                        exiting={FadeOut.duration(120)}
-                        style={{ flex: 1 }}
-                    />
-                </Pressable>
+            {open && (
+                <Portal>
+                    <Pressable
+                        onPress={closePopover}
+                        style={{ position: "absolute", inset: 0 }}
+                    >
+                        {/* Animated Wrapper */}
+                        <Animated.View
+                            entering={FadeIn.duration(120)}
+                            exiting={FadeOut.duration(120)}
+                            style={{ flex: 1 }}
+                        />
+                    </Pressable>
 
-                {/* Floating Popover Container */}
-                <PopoverFloating />
-            </Modal>
+                    {/* Floating Popover Container */}
+                    <PopoverFloating />
+                </Portal>
+            )}
         </PopoverContext.Provider>
     );
 }

@@ -28,7 +28,7 @@ export const UserCard = ({
                     <Text varient="subheader">{username}</Text>
                     {isVerified && 
                     <>
-                        <Icon name="checkmark-circle" className="text-primary" />
+                        <Icon name="checkmark-circle" color="#28D8FF" className="text-primary" />
                         <Text varient="muted">{verification}</Text>
                     </>
                     }
