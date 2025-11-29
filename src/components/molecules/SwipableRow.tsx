@@ -7,7 +7,7 @@ import Animated, {
   interpolate,
   runOnJS,
 } from "react-native-reanimated";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 import { TableRow } from "./TableRow";
 import { Icon } from "../atoms/Icon";
 

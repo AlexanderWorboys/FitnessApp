@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import Svg, { Circle } from "react-native-svg";
 import { Text } from "../atoms/Text";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 
 type SizeVariant = "sm" | "md" | "lg" | "xl";
 

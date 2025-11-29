@@ -1,10 +1,10 @@
 import BottomSheet, { BottomSheetScrollView, useBottomSheet } from "@gorhom/bottom-sheet";
 import { Children, useEffect, useMemo, useRef, useState } from "react";
-import { useUIStore } from "../../store/uiStore";
+import { useUIStore } from "../../store/ui/uiStore";
 import { Extrapolation, interpolate, useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 import { useWindowDimensions } from 'react-native';
-import { useSheetStore } from "../../store/sheetStore";
-import { useThemeStore } from "../../store/themeStore";
+import { useSheetStore } from "../../store/ui/sheetStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 
 export const GlobalBottomSheet = () => {
     const { isOpen, closeSheet, setSheetIndex, content, snapPoints } = useSheetStore();

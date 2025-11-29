@@ -1,5 +1,5 @@
 import { Pressable } from "react-native";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 import { Input } from "../atoms/Input";
 import { Row } from "../atoms/Row";
 import { Icon } from "../atoms/Icon";

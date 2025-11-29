@@ -1,9 +1,9 @@
 import { View, ViewProps } from "react-native";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 
 type Varient = "elevated" | "outlined" | "flat";
 
-interface Props extends ViewProps {
+export interface CardProps extends ViewProps {
     lightClassName?: string;
     darkClassName?: string;
     variant?: Varient;
@@ -18,7 +18,7 @@ export const Card = ({
     variant = "elevated",
     className = "",
     ...props
-}: Props) => {
+}: CardProps) => {
     const { theme } = useThemeStore();
 
   const variantClasses: Record<Varient, string> = {

@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { useThemeStore } from "../store/themeStore";
+import { useThemeStore } from "../store/ui/themeStore";
 import { PropsWithChildren, useEffect } from "react";
 import { Appearance } from "react-native";
 import { setStatusBarStyle } from "expo-status-bar";

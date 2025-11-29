@@ -3,7 +3,7 @@ import { WorkoutSummary } from "../organisms/WorkoutSummary";
 import ExercisePanel from "../organisms/ExercisePanel";
 import { WorkoutExercise } from "../../types/workout";
 import { Button, Text } from "../atoms";
-import { useSheetStore } from "../../store/sheetStore";
+import { useSheetStore } from "../../store/ui/sheetStore";
 import BottomSheet, { BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
 import { useCallback, useEffect, useRef, useState } from "react";
 import AddExerciseModal from "../modals/AddExerciseModal";

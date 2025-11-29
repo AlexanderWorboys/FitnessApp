@@ -92,4 +92,22 @@ export const getAllTemplates = async () => {
   }))
 }
 
+export const deleteWorkoutLocal = async (id: string) => {
+  if (!db) return
+  
+  return db.runAsync(
+    `DELETE FROM workouts WHERE id = ?`,
+    [id]
+  );
+}
+
+export async function updateWorkoutId(oldId: string, newId: string) {
+  if (!db) return
+  
+  return db.runAsync(
+    `UPDATE workouts SET id = ? WHERE id = ?`,
+    [newId, oldId]
+  );
+}
+
 export default db

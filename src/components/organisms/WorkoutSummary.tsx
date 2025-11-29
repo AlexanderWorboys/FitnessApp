@@ -1,10 +1,10 @@
 import { View } from "react-native";
 import { Workout } from "../../types/workout";
 import { Text } from "../atoms/Text";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 import { Button, Icon, Input } from "../atoms";
 import { useCallback } from "react";
-import { useSheetStore } from "../../store/sheetStore";
+import { useSheetStore } from "../../store/ui/sheetStore";
 import { UserCard } from "../molecules/userCard";
 import { Divider } from "../atoms/Divider";
 import { ChipGroup } from "../molecules/ChipGroup";

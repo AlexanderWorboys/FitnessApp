@@ -1,5 +1,5 @@
 import { Text as RNText, TextProps } from "react-native";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 
 type Varient = "title" | "header" | "subheader" | "body" | "muted";
 

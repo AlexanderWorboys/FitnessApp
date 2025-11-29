@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity } from "react-native";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 
 interface ChipProps {
   label: string;

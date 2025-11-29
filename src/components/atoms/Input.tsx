@@ -1,4 +1,4 @@
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 import { TextInput } from "react-native";
 import { inputStateVariants, inputVariants } from "../../theme/Varients";
 

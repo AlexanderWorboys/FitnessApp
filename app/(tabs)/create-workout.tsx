@@ -2,7 +2,7 @@ import { TouchableOpacity, View } from "react-native";
 import { Button, Text, ThemedView, ThemeToggle } from "../../src/components/atoms";
 import { useRef } from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import { useSheetStore } from "../../src/store/sheetStore";
+import { useSheetStore } from "../../src/store/ui/sheetStore";
 import { Workout } from "../../src/components/templates/Workout";
 import { useWorkoutStore } from "../../src/store/workout/useWorkoutStore";
 

@@ -16,20 +16,12 @@ export const workoutApi = {
     },
 
     async getWorkouts() {
-        try {
-            const res = await axios.get(`${API_URL}/workouts`);
-            console.log("fetch result: ", res.data);
-            return res.data;
-        } catch (err: any) {
-            if (err.response) {
-                console.error("Response error:", err.response.status, err.response.data);
-            } else if (err.request) {
-                console.error("No response received:", err.request);
-            } else {
-                console.error("Axios setup error:", err.message);
-            }
-            throw err;
-        }
-    }
+        const res = await axios.get(`${API_URL}/workouts`);
+        return res.data;
+    },
+
+    async deleteWorkout(id: string) {
+        return axios.delete(`${API_URL}/workouts/${id}`);
+    },
 
 }

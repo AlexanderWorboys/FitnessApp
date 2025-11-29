@@ -1,5 +1,5 @@
 import { View, ViewProps } from "react-native";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 import React from "react";
 
 interface ThemedViewProps extends ViewProps {

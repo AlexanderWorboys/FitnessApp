@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 // import Animated, {
 //     useAnimatedStyle,
 //     withTiming,
@@ -27,7 +27,7 @@ export default function TabBar() {
 
     const tabBarBackgroundColors = {
         light: '#ffffff', // your light mode bg-nav-light
-        dark: '#313131',  // your dark mode bg-nav-dark
+        dark: '#121212',  // your dark mode bg-nav-dark
     };
 
     return (

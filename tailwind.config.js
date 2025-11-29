@@ -25,7 +25,7 @@ module.exports = {
         "background-light": "#F9FAFB",
         "background-dark": "#0A0A0A",
         "card-light": "#FFFFFF",
-        "card-dark": "#313131",
+        "card-dark": "#191919",
         "muted-light": "#F3F4F6", // for Inputs 
         "muted-dark": "#374151",
         "nav-light": '#FFFFFF',

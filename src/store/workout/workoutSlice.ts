@@ -10,6 +10,7 @@ export interface WorkoutSlice {
   startWorkout: (name: string, templateId?: string) => void;
   completeWorkout: () => Promise<void>;
   cancelWorkout: () => void;
+  deleteWorkout: (id: string) => void;
   loadWorkoutHistory: () => Promise<void>;
   updateWorkoutName: (id: string, name: string) => void;
 }
@@ -45,6 +46,18 @@ export const createWorkoutSlice: StateCreator<WorkoutSlice> = (set, get) => ({
   },
 
   cancelWorkout: () => set({ activeWorkout: null }),
+
+  deleteWorkout: async (id) => {
+    set((state) => ({
+      workoutHistory: state.workoutHistory.filter(
+        (w) => w.id !== id
+      ),
+    }))
+
+    const updated = await workoutRepo.deleteWorkout(id);
+
+    set({workoutHistory: updated})
+  },
 
   loadWorkoutHistory: async () => {
     const workouts = await workoutRepo.getAllWorkouts();

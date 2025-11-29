@@ -4,6 +4,7 @@ import { ListItem } from "../../src/components/molecules/ListItem";
 import { Text } from "../../src/components/atoms";
 import { formatDate } from "../../src/utils/formatDate";
 import { useWorkoutStore } from "../../src/store/workout/useWorkoutStore";
+import WorkoutHistoryItem from "../../src/components/organisms/Workouts/WorkoutHistoryItem";
 
 export default function HistoryScreen() {
   const workoutHistory = useWorkoutStore((s) => s.workoutHistory);
@@ -16,22 +17,7 @@ export default function HistoryScreen() {
         data={workoutHistory}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View className="mb-4">
-            <ListItem title={item.name} subtext={formatDate(item.startTime)} />
-            {item.exercises.map((ex, index) => (
-              <View key={`exercise=${item.id}-${index}`}>
-                <Text>{index}. {ex.name} | {ex.type}</Text>
-                {ex.sets.map((set, setIndex) => (
-                  <View key={`exercise=${item.id}-${index}-${setIndex}`}>
-                    {ex.type == "weight" && <Text>set {setIndex}. {set.kg} x {set.reps}</Text>}
-                    {ex.type == "timed" && <Text>set {setIndex}. {set.km} in {set.time}</Text>}
-                    
-                  </View>
-                ))}
-              </View>
-                
-            ))}
-          </View>
+          <WorkoutHistoryItem workout={item} />
         )}
       />
     </ThemedView>

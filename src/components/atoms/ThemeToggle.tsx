@@ -1,6 +1,6 @@
 
 import { Button } from "./Button";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 
 export const ThemeToggle = () => {
   const { theme, toggleTheme } = useThemeStore();

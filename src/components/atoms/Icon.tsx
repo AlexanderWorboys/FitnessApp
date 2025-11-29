@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 import { Text } from "react-native";
 
 interface Props {

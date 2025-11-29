@@ -1,4 +1,4 @@
-import { getAllWorkouts, insertWorkout } from "../../database/workoutDb";
+import { getAllWorkouts, insertWorkout, deleteWorkoutLocal, updateWorkoutId } from "../../database/workoutDb";
 import { fromBackendWorkout, toBackendWorkout } from "../../mappers/workoutMapper";
 import { Workout } from "../../types/workout";
 import { workoutApi } from "./workoutApi";
@@ -16,16 +16,12 @@ export const workoutRepo = {
     try {
       const backendWorkout = toBackendWorkout(workout);
       //conversion error to fix
-      await workoutApi.createWorkout(backendWorkout);
-    } catch (err: any) {
-            if (err.response) {
-                console.error("Response error:", err.response.status, err.response.data);
-            } else if (err.request) {
-                console.error("No response received:", err.request);
-            } else {
-                console.error("Axios setup error:", err.message);
-            }
-            throw err;
+      const saved = await workoutApi.createWorkout(backendWorkout);
+
+      // I update the workout ID to the database on so it syncs on update and delete
+      await updateWorkoutId(workout.id, saved.id);
+    } catch (err) {
+            console.warn("Backend save failed, keeping local only");
         }
 
     return getAllWorkouts();
@@ -37,13 +33,25 @@ export const workoutRepo = {
     // Optionally pull from backend and merge
     try {
       const remote = await workoutApi.getWorkouts();
-      console.log(remote)
       const mapped = remote.map(fromBackendWorkout);
       // merge logic: compare updatedAt timestamps
+      console.log("Workout Got")
       return [...local, ...mapped];
     } catch {
-      console.log("Only local fetched")
+      console.warn("Only local fetched")
       return local;
     }
   },
+
+  async deleteWorkout(id: string) {
+    await deleteWorkoutLocal(id);
+
+    try {
+      await workoutApi.deleteWorkout(id);
+    } catch(ex) {
+      console.warn("backend delete failed, will try again later", ex)
+    }
+
+    return getAllWorkouts();
+  }
 };

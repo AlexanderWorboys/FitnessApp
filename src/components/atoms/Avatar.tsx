@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Image, View, Text, ImageProps } from "react-native";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 
 type SizeVariant = "sm" | "md" | "lg" | "xl";
 

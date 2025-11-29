@@ -1,4 +1,4 @@
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 import { Text } from "../../components/atoms/Text";
 import { Row } from "../atoms/Row";
 import { Icon } from "../atoms/Icon";

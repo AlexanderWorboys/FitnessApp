@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 
 interface DividerProps {
   lightClassName?: string;

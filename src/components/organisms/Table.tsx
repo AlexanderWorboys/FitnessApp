@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { useThemeStore } from "../../store/themeStore";
+import { useThemeStore } from "../../store/ui/themeStore";
 import { TableColumn, TableRow } from "../molecules/TableRow";
 import { TableHeader } from "../molecules/TableHeader";
 import { SwipeableRow } from "../molecules/SwipableRow";
