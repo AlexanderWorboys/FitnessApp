@@ -39,7 +39,7 @@ export const insertWorkout = async (workout: any) => {
     if (!db) return
 
     await db.runAsync(
-        `INSERT INTO workouts (id, name, startTime, endTime, completed, fromTemplate, exercises)
+        `INSERT OR IGNORE INTO workouts (id, name, startTime, endTime, completed, fromTemplate, exercises)
         VALUES (?, ?, ?, ?, ?, ?, ?)`,
         [
         workout.id,

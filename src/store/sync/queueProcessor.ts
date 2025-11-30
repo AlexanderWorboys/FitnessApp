@@ -1,3 +1,5 @@
+import { updateWorkoutId } from "../../database/workoutDb";
+import { toBackendWorkout } from "../../mappers/workoutMapper";
 import { workoutApi } from "../../service/workout/workoutApi";
 import { SyncAction } from "./types";
 
@@ -20,10 +22,15 @@ export async function processSyncAction(action: SyncAction) {
 async function handleWorkoutSync(type: string, payload: any) {
   switch (type) {
     case "DELETE":
-      return workoutApi.deleteWorkout(payload.id);
+      return workoutApi.deleteWorkout(payload);
 
-    case "CREATE":
-      return workoutApi.createWorkout(payload);
+    case "CREATE": {
+      const backendWorkout = toBackendWorkout(payload);
+      const saved = await workoutApi.createWorkout(backendWorkout);
+
+      await updateWorkoutId(payload.id, saved.id);
+      return;
+    }
 
     // case "UPDATE":
     //   return workoutApi.updateWorkout(payload.id, payload);

@@ -27,7 +27,8 @@ export interface Workout {
   endTime?: number
   exercises: WorkoutExercise[]
   completed: boolean
-  fromTemplate?: string
+  fromTemplate?: string;
+  updatedAt?: any;
 }
 
 export interface WorkoutTemplate {

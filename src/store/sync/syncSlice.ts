@@ -21,6 +21,7 @@ export const useSyncStore = create<SyncStore>((set, get) => ({
 
   processQueue: async () => {
     const { queue, removeFromQueue } = get();
+    //console.log("starting sync process... ", queue) // Use for testing sync data
 
     for (const action of queue) {
       try {

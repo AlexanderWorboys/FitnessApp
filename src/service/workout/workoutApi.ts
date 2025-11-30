@@ -21,6 +21,7 @@ export const workoutApi = {
     },
 
     async deleteWorkout(id: string) {
+        console.log(id)
         return axios.delete(`${API_URL}/workouts/${id}`);
     },
 
