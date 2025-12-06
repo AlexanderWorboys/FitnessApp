@@ -1,12 +1,13 @@
-import axios from "axios";
-import { Workout } from "../../types/workout";
-import { URL } from "../../../config.local";
+// import axios from "axios";
+// import { Workout } from "../../types/workout";
+//import { URL } from "../../../config.local";
+import { apiClinet } from "../api/apiClient";
 
-const API_URL = URL
+//const API_URL = URL
 
 export const workoutApi = {
     async createWorkout(workout: any) {
-        const res = await axios.post(`${API_URL}/workouts`, {
+        const res = await apiClinet.post(`/workouts`, {
             ...workout,
             startTime: new Date(workout.startTime).toISOString(),
             endTime: workout.endTime ? new Date(workout.endTime).toISOString() : null,
@@ -16,13 +17,13 @@ export const workoutApi = {
     },
 
     async getWorkouts() {
-        const res = await axios.get(`${API_URL}/workouts`);
+        const res = await apiClinet.get(`/workouts`);
         return res.data;
     },
 
     async deleteWorkout(id: string) {
         console.log(id)
-        return axios.delete(`${API_URL}/workouts/${id}`);
+        return apiClinet.delete(`/workouts/${id}`);
     },
 
 }

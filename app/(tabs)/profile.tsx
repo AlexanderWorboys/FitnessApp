@@ -6,13 +6,14 @@ import { useRef, useState } from "react";
 import { Feather } from "@expo/vector-icons";
 import { startSyncListener } from "../../src/store/sync/startSyncListener";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from "expo-router";
 
 export default function Profile() {
     const [menuVisible, setMenuVisible] = useState(false);
     const iconRef = useRef(null);
 
     const handleLogOut = async () => {
-        await AsyncStorage.removeItem("authToken");
+        console.log("Logging out...");
     }
 
     return (

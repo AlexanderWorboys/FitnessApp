@@ -1,5 +1,5 @@
 import { getAllWorkouts, insertWorkout, deleteWorkoutLocal, updateWorkoutId } from "../../database/workoutDb";
-import { fromBackendWorkout, toBackendWorkout } from "../../mappers/workoutMapper";
+import { fromBackendWorkout, toBackendWorkout } from "./workoutMapper";
 import { useSyncStore } from "../../store/sync/syncSlice";
 import { Workout } from "../../types/workout";
 import { workoutApi } from "./workoutApi";

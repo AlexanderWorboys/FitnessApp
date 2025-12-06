@@ -4,7 +4,7 @@ import { ListItem } from "../../src/components/molecules/ListItem";
 import { Text } from "../../src/components/atoms";
 import { formatDate } from "../../src/utils/formatDate";
 import { useWorkoutStore } from "../../src/store/workout/useWorkoutStore";
-import WorkoutHistoryItem from "../../src/components/organisms/Workouts/WorkoutHistoryItem";
+import WorkoutHistoryItem from "../../src/features/workout/components/WorkoutHistoryItem";
 
 export default function HistoryScreen() {
   const workoutHistory = useWorkoutStore((s) => s.workoutHistory);

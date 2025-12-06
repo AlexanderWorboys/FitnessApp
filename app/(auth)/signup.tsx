@@ -1,12 +1,9 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import SignupScreen from '../../src/features/auth/screens/SignupScreen'
 
-const signup = () => {
-  return (
-    <View>
-      <Text>signup</Text>
-    </View>
-  )
+const Signup = () => {
+  return <SignupScreen />
 }
 
-export default signup
+export default Signup

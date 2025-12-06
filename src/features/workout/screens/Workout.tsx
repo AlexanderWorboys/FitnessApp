@@ -1,15 +1,15 @@
 import { View, TouchableOpacity } from "react-native";
-import { WorkoutSummary } from "../organisms/WorkoutSummary";
-import ExercisePanel from "../organisms/ExercisePanel";
-import { WorkoutExercise } from "../../types/workout";
-import { Button, Text } from "../atoms";
-import { useSheetStore } from "../../store/ui/sheetStore";
+import { WorkoutExercise } from "../../../types/workout";
+import { Button, Text } from "../../../components/atoms";
+import { useSheetStore } from "../../../store/ui/sheetStore";
 import BottomSheet, { BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
 import { useCallback, useEffect, useRef, useState } from "react";
-import AddExerciseModal from "../modals/AddExerciseModal";
-import { Divider } from "../atoms/Divider";
-import TimerDisplay from "../molecules/Timer";
-import { useWorkoutStore } from "../../store/workout/useWorkoutStore";
+import AddExerciseModal from "./AddExerciseModal";
+import { Divider } from "../../../components/atoms/Divider";
+import TimerDisplay from "../../../components/molecules/Timer";
+import { useWorkoutStore } from "../../../store/workout/useWorkoutStore";
+import { WorkoutSummary } from "../components/WorkoutSummary";
+import ExercisePanel from "../components/ExercisePanel";
 
 
 

@@ -4,8 +4,8 @@ import { inputStateVariants, inputVariants } from "../../theme/Varients";
 
 export type InputState = "default" | "success" | "error" | "blended";
 
-interface InputProps {
-    keyboardType?: "numeric" | "default"
+interface InputProps extends React.ComponentProps<typeof TextInput> {
+    //keyboardType?: "numeric" | "default"
     variant?: keyof typeof inputVariants;
     state?: InputState;
     placeholder?: string;
@@ -17,7 +17,7 @@ interface InputProps {
 
 
 export const Input = ({
-    keyboardType = "default",
+    //keyboardType = "default",
     variant = "default",
     state = "default",
     placeholder,
@@ -42,7 +42,7 @@ export const Input = ({
             value={value}
             onChangeText={onChangeText}
             secureTextEntry={secureTextEntry}
-            keyboardType={keyboardType}
+            //keyboardType={keyboardType}
         />
       )
 

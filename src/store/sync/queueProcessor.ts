@@ -1,6 +1,6 @@
 import { updateWorkoutId } from "../../database/workoutDb";
-import { toBackendWorkout } from "../../mappers/workoutMapper";
 import { workoutApi } from "../../service/workout/workoutApi";
+import { toBackendWorkout } from "../../service/workout/workoutMapper";
 import { SyncAction } from "./types";
 
 // Handles what type of sync action will be passed into the backlog

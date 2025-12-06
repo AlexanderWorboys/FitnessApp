@@ -1,14 +1,13 @@
-import { useState } from "react";
-import { weightColumns } from "../../data/tableColumns/weightColumns"
-import Table from "./Table";
 import { Button, View } from "react-native";
-import { Icon, Text, Row, Card, Input } from "../atoms";
-import { WorkoutExercise } from "../../types/workout"
-import { TableColumn } from "../molecules/TableRow";
-import { createEmptySet } from "../../data/tableColumns";
-import { formatPreviousSet } from "../../utils/findPreviousExerciseSets";
-import OptionsMenu from "../molecules/OptionsMenu";
-import { useWorkoutStore } from "../../store/workout/useWorkoutStore";
+import { Card, Input, Text } from "../../../components/atoms";
+import { createEmptySet } from "../../../data/tableColumns";
+import { useWorkoutStore } from "../../../store/workout/useWorkoutStore";
+import { WorkoutExercise } from "../../../types/workout";
+import { formatPreviousSet } from "../../../utils/findPreviousExerciseSets";
+import OptionsMenu from "../../../components/molecules/OptionsMenu";
+import { TableColumn } from "../../../components/molecules/TableRow";
+import Table from "../../../components/organisms/Table";
+
 
 interface ExerciseSectionProps {
     exercise: WorkoutExercise;

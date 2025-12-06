@@ -3,7 +3,7 @@ import { Button, Card, Text, ThemedView, ThemeToggle } from "../../src/component
 import { useRef } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { useSheetStore } from "../../src/store/ui/sheetStore";
-import { Workout } from "../../src/components/templates/Workout";
+import { Workout } from "../../src/features/workout/screens/Workout";
 import { useWorkoutStore } from "../../src/store/workout/useWorkoutStore";
 import { UserCard } from "../../src/components/molecules/userCard";
 import { ChipGroup } from "../../src/components/molecules/ChipGroup";

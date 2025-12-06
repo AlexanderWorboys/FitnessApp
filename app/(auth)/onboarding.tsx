@@ -6,18 +6,12 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
 
 const onboarding = () => {
-
-    const handleLogin = async () => {
-        await AsyncStorage.setItem("authToken", "dummy-token");
-    }
-
   return (
     <ThemedView className='flex-1 justify-center align-middle px-4 gap-4'>
       <Text className='text-9xl text-center font-inter-extrabold' lightClassName='text-primary' darkClassName='text-primary'>PATH</Text>
       <Text varient='title' className='text-center'>Welcome!</Text>
       <Text varient='subheader' className='text-center line'>step into the world of health & fitness to embark on your Path.</Text>
-      {/* <Button className='py-2' textClassName='text-xl' label='login' onPress={handleLogin} /> */}
-      <Button className='py-2' textClassName='text-lg' label='Get Started' onPress={() => router.push("/(auth)/login")} />
+      <Button className='py-2' textClassName='text-white text-lg' label='Get Started' onPress={() => router.push("/(auth)/login")} />
         <ThemeToggle />
     </ThemedView>
   )

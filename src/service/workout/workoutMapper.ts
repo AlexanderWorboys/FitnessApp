@@ -1,4 +1,4 @@
-import { Workout } from "../types/workout";
+import { Workout } from "../../types/workout";
 
 export const toBackendWorkout = (workout: Workout) => ({
   id: workout.id,

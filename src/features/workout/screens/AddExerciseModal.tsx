@@ -1,12 +1,12 @@
 import { FlatList, Modal, TouchableOpacity } from "react-native";
-import { useExerciseLibrary } from "../../store/exerciseLibrary";
-import { Card, Input, ThemedView } from "../atoms";
+import { useExerciseLibrary } from "../../../store/exerciseLibrary";
+import { Card, Input, ThemedView } from "../../../components/atoms";
 import { useState } from "react";
-import { ListItem } from "../molecules/ListItem";
-import { Divider } from "../atoms/Divider";
-import { ChipGroup } from "../molecules/ChipGroup";
-import { Chip } from "../atoms/Chip";
-import { useWorkoutStore } from "../../store/workout/useWorkoutStore";
+import { ListItem } from "../../../components/molecules/ListItem";
+import { Divider } from "../../../components/atoms/Divider";
+import { ChipGroup } from "../../../components/molecules/ChipGroup";
+import { Chip } from "../../../components/atoms/Chip";
+import { useWorkoutStore } from "../../../store/workout/useWorkoutStore";
 
 interface ModalProps {
     visible: boolean;

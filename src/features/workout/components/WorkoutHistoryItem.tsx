@@ -1,11 +1,11 @@
 import React, { memo } from "react";
 import { Workout } from "../../../types/workout";
-import PressableCard from "../../molecules/PressableCard";
-import { ListItem } from "../../molecules/ListItem";
 import { formatDate } from "../../../utils/formatDate";
-import { Button, Text } from "../../atoms";
 import { Alert, View } from "react-native";
 import { useWorkoutStore } from "../../../store/workout/useWorkoutStore";
+import PressableCard from "../../../components/molecules/PressableCard";
+import { ListItem } from "../../../components/molecules/ListItem";
+import { Button, Text } from "../../../components/atoms";
 
 interface Props {
     workout: Workout

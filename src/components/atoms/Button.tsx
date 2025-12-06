@@ -7,6 +7,7 @@ type Varient =
   | "primary"
   | "danger"
   | "black"
+  | "white"
   | "blue"
   | "outline"
   | "ghost"
@@ -29,6 +30,7 @@ const varients = {
     primary: 'bg-primary',
     danger: 'bg-red-500',
     black: 'bg-black border border-white',
+    white: 'bg-white border border-black',
     blue: 'bg-blue-500',
     outline: 'border border-primary',
     ghost: ''
@@ -44,7 +46,7 @@ export const Button = ({
   rightIcon,
   iconSize = 18,
   className = "",
-  textClassName = ""
+  textClassName = "text-white"
 }: ButtonProps) => {
   const disabledStyles = disabled
     ? "opacity-50"
@@ -70,7 +72,7 @@ export const Button = ({
             />
           )}
 
-          <Text className={`text-white font-inter-semibold ${textClassName}`}>
+          <Text className={`font-inter-semibold ${textClassName}`}>
             {label}
           </Text>
 

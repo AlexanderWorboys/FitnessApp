@@ -1,24 +1,12 @@
 import { Redirect } from "expo-router";
-import { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuthStore } from "../src/store/auth/useAuthStore";
 
 export default function Index() {
-  const [authToken, setAuthToken] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { hydrated, isAuthenticated } = useAuthStore();
 
-  useEffect(() => {
-    const restoreSession = async () => {
-      const token = await AsyncStorage.getItem("authToken");
-      setAuthToken(token);
-      setLoading(false);
-    };
-    restoreSession();
-  }, []);
+  if(!hydrated) return null;
 
-  if (loading) return null;
-  console.log("Auth Token in Index:", authToken);
-
-  return authToken
+  return isAuthenticated
     ? <Redirect href="/(tabs)/home" />
     : <Redirect href="/(auth)/onboarding" />;
 }

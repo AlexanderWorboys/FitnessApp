@@ -1,15 +1,15 @@
-import { View } from "react-native";
-import { Workout } from "../../types/workout";
-import { Text } from "../atoms/Text";
-import { useThemeStore } from "../../store/ui/themeStore";
-import { Button, Icon, Input } from "../atoms";
 import { useCallback } from "react";
-import { useSheetStore } from "../../store/ui/sheetStore";
-import { UserCard } from "../molecules/userCard";
-import { Divider } from "../atoms/Divider";
-import { ChipGroup } from "../molecules/ChipGroup";
-import TimerDisplay from "../molecules/Timer";
-import { useWorkoutStore } from "../../store/workout/useWorkoutStore";
+import { useSheetStore } from "../../../store/ui/sheetStore";
+import { useThemeStore } from "../../../store/ui/themeStore";
+import { useWorkoutStore } from "../../../store/workout/useWorkoutStore";
+import { Workout } from "../../../types/workout";
+import { View } from "react-native";
+import TimerDisplay from "../../../components/molecules/Timer";
+import { Button, Icon, Input } from "../../../components/atoms";
+import { UserCard } from "../../../components/molecules/userCard";
+import { ChipGroup } from "../../../components/molecules/ChipGroup";
+import { Divider } from "../../../components/atoms/Divider";
+
 
 
 interface WorkoutSummaryProps {
